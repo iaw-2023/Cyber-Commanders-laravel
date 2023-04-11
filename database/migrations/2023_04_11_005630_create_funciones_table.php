@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('funciones', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('fecha');
+            $table->datetime('fecha');
             $table->bigInteger('precio')->nullable();
             $table->timestamps();
 
