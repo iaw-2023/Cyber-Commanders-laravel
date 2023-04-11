@@ -14,6 +14,11 @@ return new class extends Migration
         Schema::create('salas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('capacidad');
+            $table->string('tipo');
+            $table->string('nombre');
+            $table->unsignedBigInteger('funcion_id'); 
+            $table->foreign('funcion_id')->references('id')->on('funciones');
         });
     }
 
