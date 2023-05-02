@@ -19,5 +19,4 @@ class Sala extends Model
         return $this->hasMany(Funcion::class);
     }
 
-    public function 
 }

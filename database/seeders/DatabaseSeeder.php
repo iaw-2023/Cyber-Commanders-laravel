@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call(UserSeeder::class);
-        $this->call(PeliculasSeeder::class);
         $this->call(SalasSeeder::class);
+        $this->call(PeliculasSeeder::class);
         $this->call(FuncionesSeeder::class);
         $this->call(ExtrasSeeder::class);
         $this->call(EntradasSeeder::class);
