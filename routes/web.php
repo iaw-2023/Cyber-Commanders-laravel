@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PeliculasController;
+use App\Http\Controllers\SalasController;
+use App\Http\Controllers\FuncionesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +28,12 @@ Route::get('/dashboard', function () {
 Route::get('/dashboar', function () {
     return view('vistas.dashboar');
 })->middleware(['auth', 'verified'])->name('dashboar');
+
+Route::get('/peliculas', [PeliculasController::class, 'index']);
+
+Route::get('/salas', [SalasController::class, 'index']);
+
+Route::get('/funciones', [FuncionesController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

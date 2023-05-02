@@ -22,13 +22,9 @@ class PeliculaFactory extends Factory
 
         return [
          'nombre' => $faker->movie, 
-         'duracion'=> $this->minutos($faker->runtime),
+         'duracion'=> fake()->numberBetween(80, 180),
          'poster'=> fake()->imageUrl
         ];
     }
 
-    function minutos($runtime){
-        $time = explode(':', $runtime);
-        return ($time[0]*60) + ($time[1]);
-    }
 }
