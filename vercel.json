@@ -31,6 +31,14 @@
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "database",
         "SSR_TEMP_PATH": "/tmp/ssr",
-        "NODE_PATH": "node"
+        "NODE_PATH": "node",
+
+        "MAIL_DRIVER": "smtp",
+        "MAIL_HOST": "smtp.gmail.com",
+        "MAIL_PASSWORD":"kmkseaibfdmhlkkr",
+        "MAIL_USERNAME":"cinesiaw2023@gmail.com",
+        "MAIL_ENCRYPTION":"ssl",
+        "MAIL_PORT":"465"
+
     }
 }
