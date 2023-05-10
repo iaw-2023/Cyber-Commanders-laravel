@@ -17,11 +17,11 @@ return new class extends Migration
             $table->bigInteger('precio')->nullable();
             $table->timestamps();
 
-            $table->unsignedBigInteger('pelicula_id'); 
-            $table->foreign('pelicula_id')->references('id')->on('peliculas');
+            $table->unsignedBigInteger('pelicula_id')->nullable();
+            $table->foreign('pelicula_id')->references('id')->on('peliculas')->onDelete('set null');
 
-            $table->unsignedBigInteger('sala_id'); 
-            $table->foreign('sala_id')->references('id')->on('salas');
+            $table->unsignedBigInteger('sala_id')->nullable(); 
+            $table->foreign('sala_id')->references('id')->on('salas')->onDelete('set null');
   
         });
     }

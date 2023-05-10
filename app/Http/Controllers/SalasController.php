@@ -23,7 +23,7 @@ class SalasController extends Controller
      */
     public function create()
     {
-        //
+        return view('vistas.crear_sala');
     }
 
     /**
@@ -31,7 +31,12 @@ class SalasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sala = new Sala();
+        $sala->nombre = $request->nombre;
+        $sala->capacidad = $request->capacidad;
+        $sala->tipo = $request->tipo;
+        $sala->save();
+        return redirect()->route('salas')->with('message', 'Sala creada correctamente!');
     }
 
     /**
@@ -47,7 +52,8 @@ class SalasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $sala = Sala::findOrFail($id);
+        return view('vistas.editar_sala')->with(compact('sala','id'));
     }
 
     /**
@@ -55,7 +61,12 @@ class SalasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $sala = Sala::findOrFail($id);
+        $sala->nombre = $request->nombre;
+        $sala->capacidad = $request->capacidad;
+        $sala->tipo = $request->tipo;
+        $sala->save();
+        return redirect()->route('salas')->with('message', 'Sala editada correctamente!');
     }
 
     /**
@@ -63,7 +74,9 @@ class SalasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $sala = Sala::findOrFail($id);
+        $sala->delete();
+        return redirect()->back()->with('message', 'Sala eliminada correctamente!');   
     }
 
 }

@@ -25,20 +25,39 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboar', function () {
-    return view('vistas.dashboar');
-})->middleware(['auth', 'verified'])->name('dashboar');
-
-Route::get('/peliculas', [PeliculasController::class, 'index']);
-
-Route::get('/salas', [SalasController::class, 'index']);
-
-Route::get('/funciones', [FuncionesController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+//rutas de peliculas
+Route::get('/peliculas', [PeliculasController::class, 'index'])->name('peliculas');
+Route::get('/crear_pelicula', [PeliculasController::class, 'create'])->name('crear_pelicula');
+Route::get('/editar_pelicula/{id}', [PeliculasController::class, 'edit'])->name('editar_pelicula');
+Route::post('store_pelicula' , [PeliculasController::class, 'store'])->name('store_pelicula');
+Route::post('update_pelicula/{id}' , [PeliculasController::class, 'update'])->name('update_pelicula');
+Route::delete('destroy_pelicula/{id}' , [PeliculasController::class, 'destroy'])->name('destroy_pelicula');
+
+//rutas de salas
+Route::get('/salas', [SalasController::class, 'index'])->name('salas');
+Route::get('/crear_sala', [SalasController::class, 'create'])->name('crear_sala');
+Route::get('/editar_sala/{id}', [SalasController::class, 'edit'])->name('editar_sala');
+Route::post('store_sala' , [SalasController::class, 'store'])->name('store_sala');
+Route::post('update_sala/{id}' , [SalasController::class, 'update'])->name('update_sala');
+Route::delete('destroy_sala/{id}' , [SalasController::class, 'destroy'])->name('destroy_sala');
+
+//Rutas de funciones
+Route::get('/funciones', [FuncionesController::class, 'index'])->name('funciones');
+Route::get('/crear_funcion', [FuncionesController::class, 'create'])->name('crear_funcion');
+Route::get('/editar_funcion/{id}', [FuncionesController::class, 'edit'])->name('editar_funcion');
+Route::post('store_funcion' , [FuncionesController::class, 'store'])->name('store_funcion');
+Route::post('update_funcion/{id}' , [FuncionesController::class, 'update'])->name('update_funcion');
+Route::delete('destroy_funcion/{id}' , [FuncionesController::class, 'destroy'])->name('destroy_funcion');
+
+
+
+
 
 require __DIR__.'/auth.php';

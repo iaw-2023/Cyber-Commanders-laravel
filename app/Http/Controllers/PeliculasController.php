@@ -24,7 +24,8 @@ class PeliculasController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('vistas.crear_pelicula');
     }
 
     /**
@@ -32,7 +33,12 @@ class PeliculasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pelicula = new Pelicula();
+        $pelicula->nombre = $request->nombre;
+        $pelicula->poster = $request->poster;
+        $pelicula->duracion = $request->duracion;
+        $pelicula->save();
+        return redirect()->route('peliculas')->with('message', 'Pelicula creada correctamente!');
     }
 
     /**
@@ -40,7 +46,7 @@ class PeliculasController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -48,7 +54,8 @@ class PeliculasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pelicula = Pelicula::findOrFail($id);
+        return view('vistas.editar_pelicula')->with(compact('pelicula'));
     }
 
     /**
@@ -56,6 +63,12 @@ class PeliculasController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $pelicula = Pelicula::findOrFail($id);
+        $pelicula->nombre = $request->nombre;
+        $pelicula->poster = $request->poster;
+        $pelicula->duracion = $request->duracion;
+        $pelicula->save();
+        return redirect()->route('peliculas')->with('message', 'Pelicula editada correctamente!');
         //
     }
 
@@ -64,7 +77,9 @@ class PeliculasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pelicula = Pelicula::findOrFail($id);
+        $pelicula->delete();
+        return redirect()->back()->with('message', 'Pelicula eliminada correctamente!');   
     }
 
 }
