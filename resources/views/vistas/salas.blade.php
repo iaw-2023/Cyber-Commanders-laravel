@@ -4,6 +4,10 @@
         {{ session()->get('message') }}
     </div>
 @endif
+<div class="bg flex justify-center">
+      <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Salas</h1>
+</div>
+
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

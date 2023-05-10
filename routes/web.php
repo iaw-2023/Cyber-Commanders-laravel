@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PeliculasController;
 use App\Http\Controllers\SalasController;
+use App\Http\Controllers\ExtrasController;
 use App\Http\Controllers\FuncionesController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,14 @@ Route::delete('destroy_funcion/{id}' , [FuncionesController::class, 'destroy'])-
 Route::post('/funciones', [FuncionesController::class, 'indexMovie'])->name('indexMovie');
 
 //Rutas de extras
+
+Route::get('/extras', [ExtrasController::class, 'index'])->name('extras');
+Route::get('/crear_extra', [ExtrasController::class, 'create'])->name('crear_extra');
+Route::get('/editar_extra/{id}', [ExtrasController::class, 'edit'])->name('editar_extra');
+Route::post('store_extra' , [ExtrasController::class, 'store'])->name('store_extra');
+Route::post('update_extra/{id}' , [ExtrasController::class, 'update'])->name('update_extra');
+Route::delete('destroy_extra/{id}' , [ExtrasController::class, 'destroy'])->name('destroy_extra');
+
 
 
 

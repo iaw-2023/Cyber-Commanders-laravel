@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Extra;
 
 class ExtrasController extends Controller
 {
@@ -13,7 +14,8 @@ class ExtrasController extends Controller
      */
     public function index()
     {
-        //
+        $extras = Extra::all();
+        return view('vistas.extras')->with(compact('extras'));
     }
 
     /**
@@ -21,7 +23,7 @@ class ExtrasController extends Controller
      */
     public function create()
     {
-        //
+        return view('vistas.crear_extra');
     }
 
     /**
@@ -29,7 +31,12 @@ class ExtrasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $extra = new Extra();
+        $extra->producto = $request->producto;
+        $extra->tamaño = $request->tamaño;
+        $extra->precio = $request->precio;
+        $extra->save();
+        return redirect()->route('extras')->with('message', 'Extra creado correctamente!');
     }
 
     /**
@@ -45,7 +52,8 @@ class ExtrasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $extra= Extra::findOrFail($id);
+        return view('vistas.editar_extra')->with(compact('extra','id'));
     }
 
     /**
@@ -53,7 +61,12 @@ class ExtrasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $extra = Extra::findOrFail($id);
+        $extra->producto = $request->producto;
+        $extra->tamaño = $request->tamaño;
+        $extra->precio = $request->precio;
+        $extra->save();
+        return redirect()->route('extras')->with('message', 'Extra creado correctamente!');
     }
 
     /**
@@ -61,7 +74,9 @@ class ExtrasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $extra = Extra::findOrFail($id);
+        $extra->delete();
+        return redirect()->back()->with('message', 'Extra eliminado correctamente!'); 
     }
 
 }
