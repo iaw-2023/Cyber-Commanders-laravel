@@ -56,7 +56,9 @@ Route::post('store_funcion' , [FuncionesController::class, 'store'])->name('stor
 Route::post('update_funcion/{id}' , [FuncionesController::class, 'update'])->name('update_funcion');
 Route::delete('destroy_funcion/{id}' , [FuncionesController::class, 'destroy'])->name('destroy_funcion');
 
+Route::post('/funciones', [FuncionesController::class, 'indexMovie'])->name('indexMovie');
 
+//Rutas de extras
 
 
 

@@ -17,9 +17,27 @@ class FuncionesController extends Controller
      */
     public function index()
     {
+        $peliculas = Pelicula::all();
         $funciones = Funcion::orderBy('fecha', 'desc')->paginate(6);
-        return view('vistas.funciones')->with(compact('funciones'));
+        return view('vistas.funciones')->with(compact('funciones','peliculas'));
     }
+
+    public function indexMovie(Request $request)
+    {
+        if($request->elegida == -1)
+        {
+          return $this->index();   
+        }
+        else{
+            $id = $request->elegida;
+            $peliculas = Pelicula::all();
+            $pelicula = Pelicula::findOrFail($id);
+            $funciones = Funcion::where('pelicula_id',$id)->orderBy('fecha', 'desc')->paginate(6);
+            return view('vistas.funciones')->with(compact('funciones','pelicula','peliculas'));
+        }
+        
+    }
+
 
     /**
      * Show the form for creating a new resource.

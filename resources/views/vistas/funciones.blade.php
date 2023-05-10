@@ -4,6 +4,23 @@
         {{ session()->get('message') }}
     </div>
 @endif
+<div class="bg flex justify-center">
+      <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Funciones</h1>
+</div>
+
+<div class="m-2 w-2/3 flex">
+    <form method="POST" action="{{route('indexMovie')}}">
+        @csrf
+        <label for="elegida" class="mb-2 block font-medium text-gray-900">Filtrar por pelicula</label>
+        <select id="elegida" name="elegida"  class="block w-full border border-gray-400 p-2.5">
+            <option value="-1">Todas</option>
+        @foreach($peliculas as $pelicula)   
+            <option value="{{$pelicula->id}}">{{$pelicula->nombre}}</option>
+        @endforeach
+        </select>
+        <input type="submit" class="rounded border bordeblue-500 m-2 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white" value="Filtrar">
+    </form>
+</div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
