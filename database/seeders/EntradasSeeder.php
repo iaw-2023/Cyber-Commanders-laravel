@@ -13,7 +13,8 @@ class EntradasSeeder extends Seeder
      */
     public function run(): void
     {
-        $entradas = [
+        Entrada::factory(25)->create();
+        /**$entradas = [
             ['funcion_id'=> 1],
             ['funcion_id'=> 1],
             ['funcion_id'=> 1],
@@ -21,5 +22,6 @@ class EntradasSeeder extends Seeder
         ];
         
         DB::table('entradas')->insert($entradas);
+        */
     }
 }
