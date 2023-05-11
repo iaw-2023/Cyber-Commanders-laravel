@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Sala;
+use App\Http\Requests\SalaStoreRequest;
+use App\Http\Requests\SalaUpdateRequest;
 
 class SalasController extends Controller
 {
@@ -29,14 +31,14 @@ class SalasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SalaStoreRequest $request)
     {
         $sala = new Sala();
         $sala->nombre = $request->nombre;
         $sala->capacidad = $request->capacidad;
         $sala->tipo = $request->tipo;
         $sala->save();
-        return redirect()->route('salas')->with('message', 'Sala creada correctamente!');
+        return redirect()->route('salas')->with('exito', 'Sala creada correctamente!');
     }
 
     /**
@@ -59,14 +61,14 @@ class SalasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SalaUpdateRequest $request, string $id)
     {
         $sala = Sala::findOrFail($id);
         $sala->nombre = $request->nombre;
         $sala->capacidad = $request->capacidad;
         $sala->tipo = $request->tipo;
         $sala->save();
-        return redirect()->route('salas')->with('message', 'Sala editada correctamente!');
+        return redirect()->route('salas')->with('exito', 'Sala editada correctamente!');
     }
 
     /**
@@ -76,7 +78,7 @@ class SalasController extends Controller
     {
         $sala = Sala::findOrFail($id);
         $sala->delete();
-        return redirect()->back()->with('message', 'Sala eliminada correctamente!');   
+        return redirect()->back()->with('exito', 'Sala eliminada correctamente!');   
     }
 
 }

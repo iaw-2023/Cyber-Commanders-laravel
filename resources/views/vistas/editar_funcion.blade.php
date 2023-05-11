@@ -1,4 +1,13 @@
 <x-app-layout>
+@if ($errors->any())
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
   <form method="POST" action="{{route('update_funcion',['id' => $funcion->id])}}">
     @csrf
     <div class="bg flex justify-center">

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Extra;
+use App\Http\Requests\ExtraStoreRequest;
+use App\Http\Requests\ExtraUpdateRequest;
+
 
 class ExtrasController extends Controller
 {
@@ -29,7 +32,7 @@ class ExtrasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ExtraStoreRequest $request)
     {
         $extra = new Extra();
         $extra->producto = $request->producto;
@@ -59,14 +62,14 @@ class ExtrasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ExtraUpdateRequest $request, string $id)
     {
         $extra = Extra::findOrFail($id);
         $extra->producto = $request->producto;
         $extra->tamaño = $request->tamaño;
         $extra->precio = $request->precio;
         $extra->save();
-        return redirect()->route('extras')->with('message', 'Extra creado correctamente!');
+        return redirect()->route('extras')->with('message', 'Extra editado correctamente!');
     }
 
     /**

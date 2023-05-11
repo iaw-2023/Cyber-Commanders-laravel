@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pelicula;
+use App\Http\Requests\PeliculaStoreRequest;
+use App\Http\Requests\PeliculaUpdateRequest;
+
 
 class PeliculasController extends Controller
 {
@@ -31,7 +34,7 @@ class PeliculasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PeliculaStoreRequest $request)
     {
         $pelicula = new Pelicula();
         $pelicula->nombre = $request->nombre;
@@ -61,14 +64,14 @@ class PeliculasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PeliculaUpdateRequest $request, string $id)
     {
         $pelicula = Pelicula::findOrFail($id);
         $pelicula->nombre = $request->nombre;
         $pelicula->poster = $request->poster;
         $pelicula->duracion = $request->duracion;
         $pelicula->save();
-        return redirect()->route('peliculas')->with('message', 'Pelicula editada correctamente!');
+        return redirect()->route('peliculas')->with('exito', 'Pelicula editada correctamente!');
         //
     }
 
@@ -79,7 +82,7 @@ class PeliculasController extends Controller
     {
         $pelicula = Pelicula::findOrFail($id);
         $pelicula->delete();
-        return redirect()->back()->with('message', 'Pelicula eliminada correctamente!');   
+        return redirect()->route('peliculas')->with('exito', 'Pelicula eliminada correctamente!');   
     }
 
 }

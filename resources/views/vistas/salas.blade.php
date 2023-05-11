@@ -1,12 +1,26 @@
+
 <x-app-layout>
-@if(session()->has('message'))
-    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
-        {{ session()->get('message') }}
-    </div>
-@endif
 <div class="bg flex justify-center">
       <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Salas</h1>
 </div>
+
+
+@if(session()->has('exito'))
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+        {{ session()->get('exito') }}
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
