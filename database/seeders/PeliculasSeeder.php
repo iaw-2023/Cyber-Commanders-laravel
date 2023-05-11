@@ -13,9 +13,7 @@ class PeliculasSeeder extends Seeder
   
     public function run(): void
     {
-        Pelicula::factory(20)
-            ->has(Funcion::factory()->count(3),'funciones')
-            ->create();
+        Pelicula::factory(20)->create();
           
     }
 
