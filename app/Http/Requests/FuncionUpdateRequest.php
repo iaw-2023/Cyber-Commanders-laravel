@@ -3,6 +3,14 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Carbon\Carbon;
+use Illuminate\Validation\Rule;
+use App\Models\Funcion;
+use App\Models\Pelicula;
+use App\Models\Sala;
+use App\Rules\FechaValidaRule;
+use App\Rules\FechaValidaUpdateRule;
+use Illuminate\Support\Arr;
 
 class FuncionUpdateRequest extends FormRequest
 {
@@ -11,7 +19,7 @@ class FuncionUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +29,17 @@ class FuncionUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $val = new FechaValidaUpdateRule();
+      
         return [
-            //
+            'fecha' => [$val],
+
         ];
+        
     }
+
 }
+
+//Funcion::where('fecha','<=','2023-10-11 21:11:00')->where('fin','>=','2023-10-11 23:02:00')->count()  
+
+

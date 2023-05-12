@@ -10,6 +10,7 @@
 @endif
   <form method="POST" action="{{route('update_funcion',['id' => $funcion->id])}}">
     @csrf
+    <input type="hidden" name="id" value="{{$funcion->id}}">
     <div class="bg flex justify-center">
       <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Editar Funcion</h1>
     </div>

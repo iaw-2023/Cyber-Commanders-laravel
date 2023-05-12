@@ -8,6 +8,8 @@ use App\Models\Pelicula;
 use App\Models\Sala;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Requests\FuncionStoreRequest;
+use App\Http\Requests\FuncionUpdateRequest;
 
 class FuncionesController extends Controller
 {
@@ -52,11 +54,15 @@ class FuncionesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FuncionStoreRequest $request)
     {
         $funcion = new Funcion();
+        $pelicula = Pelicula::findOrFail($request->pelicula);
+        $fecha = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha); 
+        $fin = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha)->addMinutes($pelicula->duracion);
         $funcion->precio = $request->precio;
-        $funcion->fecha = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha);
+        $funcion->fecha = $fecha;
+        $funcion->fin = $fin;
         $funcion->sala_id = $request->sala;
         $funcion->pelicula_id = $request->pelicula;
         $funcion->save();
@@ -86,11 +92,15 @@ class FuncionesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(FuncionUpdateRequest $request, string $id)
     {
         $funcion = Funcion::findOrFail($id);
+        $pelicula = Pelicula::findOrFail($request->pelicula);
+        $fecha = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha); 
+        $fin = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha)->addMinutes($pelicula->duracion);
         $funcion->precio = $request->precio;
-        $funcion->fecha = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha);
+        $funcion->fecha = $fecha;
+        $funcion->fin = $fin;
         $funcion->sala_id = $request->sala;
         $funcion->pelicula_id = $request->pelicula;
         $funcion->save();

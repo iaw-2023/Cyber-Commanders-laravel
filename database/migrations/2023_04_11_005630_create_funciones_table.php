@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('funciones', function (Blueprint $table) {
             $table->id();
             $table->datetime('fecha');
+            $table->datetime('fin');
             $table->bigInteger('precio')->nullable();
             $table->timestamps();
 
