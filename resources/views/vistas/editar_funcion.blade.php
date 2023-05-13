@@ -22,7 +22,9 @@
       <div class="m-3 w-1/3">
         <label for="pelicula" class="mb-2 block font-medium text-gray-900">Pelicula</label>
         <select id="pelicula" name="pelicula"  class="block w-full border border-gray-400 p-2.5">
+        @if($funcion->pelicula != null)
             <option value="{{$funcion->pelicula->id}}">{{$funcion->pelicula->nombre}}</option>
+        @endif
         @foreach($peliculas as $pelicula)   
             <option value="{{$pelicula->id}}">{{$pelicula->nombre}}</option>
         @endforeach
@@ -31,7 +33,9 @@
       <div class="m-3 w-1/3">
         <label for="sala" class="mb-2 block font-medium text-gray-900">Sala</label>
         <select id="sala" name="sala" class="w-full p-2.5">
+            @if($funcion->sala != null)
             <option value="{{$funcion->sala->id}}">{{$funcion->sala->nombre}}</option>
+            @endif
         @foreach($salas as $sala)   
             <option value="{{$sala->id}}">{{$sala->nombre}}</option>
         @endforeach

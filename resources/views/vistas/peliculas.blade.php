@@ -46,6 +46,11 @@
                                 Editar
                             </button>
                         </a>
+                        <a href="{{route('ver_pelicula', ['id' => $pelicula->id])}}">
+                            <button class="rounded border border-blue-500 bg-transparent m-2 px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white">
+                                Ver
+                            </button>
+                        </a>
                     </div>
                 </td>
             </tr>
