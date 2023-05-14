@@ -14,6 +14,15 @@ class ExtrasController extends Controller
     
     /**
      * Display a listing of the resource.
+     * @OA\Get(
+     *      path="/extras",
+     *      tags="Extras",
+     *      summary="Retorna los extras existentes."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function index()
     {
@@ -23,6 +32,15 @@ class ExtrasController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * @OA\Get(
+     *      path="/crear_extra",
+     *      tags="Extras",
+     *      summary="Crea un extra con sus respectivos detalles."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function create()
     {
@@ -31,6 +49,15 @@ class ExtrasController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @OA\Post(
+     *      path="store_extra",
+     *      tags="Extras",
+     *      summary="Guarda un extra creado con sus respectivos detalles."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function store(ExtraStoreRequest $request)
     {
@@ -52,6 +79,15 @@ class ExtrasController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * @OA\Get(
+     *      path="/editar_extra/{id}",
+     *      tags="Extras",
+     *      summary="Obtiene un extra por id y permite editarlo."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function edit(string $id)
     {
@@ -61,6 +97,15 @@ class ExtrasController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @OA\Post(
+     *      path="update_extra/{id}",
+     *      tags="Extras",
+     *      summary="Obtiene un extra por id y permite actualizarlo."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function update(ExtraUpdateRequest $request, string $id)
     {
@@ -74,6 +119,15 @@ class ExtrasController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @OA\Delete(
+     *      path="destroy_extra/{id}",
+     *      tags="Extras",
+     *      summary="Busca un extra por id y permite eliminarlo."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function destroy(string $id)
     {
