@@ -25,7 +25,7 @@ class PeliculasController extends Controller
      *      summary="Retorna las peliculas en cartelera."
      *      @OA\Response(
      *          response=200,
-     *          descriptio="OK"
+     *          description="OK"
      *      )
      * )
      */
@@ -44,7 +44,7 @@ class PeliculasController extends Controller
      *      summary="Crea una pelicula con sus respectivos detalles."
      *      @OA\Response(
      *          response=200,
-     *          descriptio="OK"
+     *          description="OK"
      *      )
      * )
      */
@@ -62,7 +62,7 @@ class PeliculasController extends Controller
      *      summary="Guarda una pelicula creada con sus respectivos detalles."
      *      @OA\Response(
      *          response=200,
-     *          descriptio="OK"
+     *          description="OK"
      *      )
      * )
      */
@@ -92,7 +92,7 @@ class PeliculasController extends Controller
      *      summary="Obtiene una pelicula por id y muestra sus respectivos detalles."
      *      @OA\Response(
      *          response=200,
-     *          descriptio="OK"
+     *          description="OK"
      *      )
      * )
      */
@@ -110,7 +110,7 @@ class PeliculasController extends Controller
      *      summary="Obtiene una pelicula por id y permite editarla."
      *      @OA\Response(
      *          response=200,
-     *          descriptio="OK"
+     *          description="OK"
      *      )
      * )
      */
@@ -128,7 +128,7 @@ class PeliculasController extends Controller
      *      summary="Obtiene una pelicula por id y permite actualizarla."
      *      @OA\Response(
      *          response=200,
-     *          descriptio="OK"
+     *          description="OK"
      *      )
      * )
      */
@@ -155,10 +155,10 @@ class PeliculasController extends Controller
      * @OA\Delete(
      *      path="destroy_pelicula/{id}",
      *      tags="Pelicula",
-     *      summary="Bueca una pelicula por id y permite eliminarla."
+     *      summary="Busca una pelicula por id y permite eliminarla."
      *      @OA\Response(
      *          response=200,
-     *          descriptio="OK"
+     *          description="OK"
      *      )
      * )
      */
