@@ -9,7 +9,8 @@
     </div>
 
     <div class="flex w-full justify-center items-center">
-        <img class="object-center" name='poster' src="{{ asset('storage/images/'.$pelicula->poster) }}"> 
+        <img class="object-center" name='poster' src="{{$pelicula->poster}}"> 
+        
     </div>
     
 </x-app-layout>

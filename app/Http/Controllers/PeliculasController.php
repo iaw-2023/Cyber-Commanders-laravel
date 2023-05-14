@@ -66,14 +66,7 @@ class PeliculasController extends Controller
         $pelicula = new Pelicula();
         $pelicula->nombre = $request->nombre;
         $pelicula->duracion = $request->duracion;
-
-        if($request->hasFile('imagen')){
-            $path_destino = 'public/images';
-            $imagen = $request->file('imagen');
-            $nombre = $imagen->getClientOriginalName();
-            $path = $imagen->storeAs($path_destino,$nombre);
-        }
-        $pelicula->poster = $nombre;
+        $pelicula->poster = $request->poster;
 
         $pelicula->save();
         return redirect()->route('peliculas')->with('message', 'Pelicula creada correctamente!');
@@ -138,14 +131,7 @@ class PeliculasController extends Controller
         $pelicula = Pelicula::findOrFail($id);
         $pelicula->nombre = $request->nombre;
         $pelicula->duracion = $request->duracion;
-
-        if($request->hasFile('imagen')){
-            $path_destino = 'public/images';
-            $imagen = $request->file('imagen');
-            $nombre = $imagen->getClientOriginalName();
-            $path = $imagen->storeAs($path_destino,$nombre);
-        }
-        $pelicula->poster = $nombre;
+        $pelicula->poster = $request->poster;
         $pelicula->save();
         return redirect()->route('peliculas')->with('exito', 'Pelicula editada correctamente!');
         //
