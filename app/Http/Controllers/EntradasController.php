@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Funcion;
+
 
 class EntradasController extends Controller
 {
@@ -20,7 +22,8 @@ class EntradasController extends Controller
      */
     public function create()
     {
-        //
+        $funciones = Funcion::all();
+        return view('vistas.crear_entrada')->with(compact('funciones'));
     }
 
     /**
@@ -28,7 +31,11 @@ class EntradasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $entrada = new Entrada();
+        $funcion = Funcion::findOrFail($request->funcion);
+
+        $entrada-> save();
+        return redirect()->route('entradas')->with('message', 'Entrada creada correctamente!');
     }
 
     /**
