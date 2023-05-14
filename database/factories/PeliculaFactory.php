@@ -17,14 +17,14 @@ class PeliculaFactory extends Factory
      */
     public function definition(): array
     {
-        $faker = \Faker\Factory::create();
+        /**$faker = \Faker\Factory::create();
         $faker->addProvider(new \Xylis\FakerCinema\Provider\Movie($faker));
 
         return [
          'nombre' => $faker->movie, 
          'duracion'=> fake()->numberBetween(80, 180),
          'poster'=> fake()->imageUrl
-        ];
+        ];*/
     }
 
 }
