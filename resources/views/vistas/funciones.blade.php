@@ -49,7 +49,11 @@
                     {{$funcion->fecha}}
                 </th>
                 <td class="px-6 py-4">
-                    {{$funcion->pelicula->nombre}}
+                @if($funcion->pelicula!=null)
+                        {{$funcion->pelicula->nombre}}
+                    @else
+                        PELICULA BORRADA    
+                    @endif
                 </td>
                 <td class="px-6 py-4">
                     {{$funcion->precio}}
