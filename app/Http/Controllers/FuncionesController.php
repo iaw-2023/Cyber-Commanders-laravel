@@ -11,11 +11,26 @@ use Illuminate\Http\Request;
 use App\Http\Requests\FuncionStoreRequest;
 use App\Http\Requests\FuncionUpdateRequest;
 
+
+/**
+ * @OA\Info(title="API Funciones", version="1.0")
+ * 
+ * @OA\Server(url="http://swagger.local")
+ */
 class FuncionesController extends Controller
 {
     
     /**
      * Display a listing of the resource.
+     * @OA\Get(
+     *      path="/funciones",
+     *      tags="Funciones",
+     *      summary="Retorna las funciones existentes."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function index()
     {
@@ -24,6 +39,17 @@ class FuncionesController extends Controller
         return view('vistas.funciones')->with(compact('funciones','peliculas'));
     }
 
+
+    /**
+     * @OA\Post(
+     *      path="/funciones",
+     *      tags="Funciones",
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
+     */
     public function indexMovie(Request $request)
     {
         if($request->elegida == -1)
@@ -43,6 +69,15 @@ class FuncionesController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * @OA\Get(
+     *      path="/crear_funcion",
+     *      tags="Funciones",
+     *      summary="Crea una función con sus respectivos detalles."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function create()
     {
@@ -53,6 +88,15 @@ class FuncionesController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @OA\Post(
+     *      path="store_funcion",
+     *      tags="Funciones",
+     *      summary="Guarda una funcion creada con sus respectivos detalles."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function store(FuncionStoreRequest $request)
     {
@@ -79,6 +123,15 @@ class FuncionesController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * @OA\Get(
+     *      path="/editar_funcion/{id}",
+     *      tags="Funciones",
+     *      summary="Obtiene una funcion por id y permite editarla."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function edit(string $id)
     {
@@ -91,6 +144,15 @@ class FuncionesController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @OA\Post(
+     *      path="update_funcion/{id}",
+     *      tags="Funciones",
+     *      summary="Obtiene una funcion por id y permite actualizarla."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function update(FuncionUpdateRequest $request, string $id)
     {
@@ -110,6 +172,15 @@ class FuncionesController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @OA\Delete(
+     *      path="destroy_funcion/{id}",
+     *      tags="Funciones",
+     *      summary="Busca una funcion por id y permite eliminarla."
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK"
+     *      )
+     * )
      */
     public function destroy(string $id)
     {

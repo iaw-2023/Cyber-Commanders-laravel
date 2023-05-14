@@ -103,7 +103,7 @@ class SalasController extends Controller
     /**
      * Update the specified resource in storage.
      * @OA\Post(
-     *      path="uupdate_sala/{id}",
+     *      path="update_sala/{id}",
      *      tags="Sala",
      *      summary="Obtiene una sala por id y permite actualizarla."
      *      @OA\Response(
