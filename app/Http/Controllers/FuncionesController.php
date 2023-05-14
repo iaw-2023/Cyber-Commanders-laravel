@@ -11,12 +11,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\FuncionStoreRequest;
 use App\Http\Requests\FuncionUpdateRequest;
 
-
-/**
- * @OA\Info(title="API Funciones", version="1.0")
- * 
- * @OA\Server(url="http://swagger.local")
- */
 class FuncionesController extends Controller
 {
     
@@ -123,6 +117,8 @@ class FuncionesController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Get(
      *      path="/editar_funcion/{id}",
      *      tags="Funciones",
@@ -144,6 +140,8 @@ class FuncionesController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Post(
      *      path="update_funcion/{id}",
      *      tags="Funciones",
@@ -172,6 +170,8 @@ class FuncionesController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Delete(
      *      path="destroy_funcion/{id}",
      *      tags="Funciones",

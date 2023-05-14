@@ -79,6 +79,8 @@ class ExtrasController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Get(
      *      path="/editar_extra/{id}",
      *      tags="Extras",
@@ -97,6 +99,8 @@ class ExtrasController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Post(
      *      path="update_extra/{id}",
      *      tags="Extras",
@@ -119,6 +123,8 @@ class ExtrasController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Delete(
      *      path="destroy_extra/{id}",
      *      tags="Extras",

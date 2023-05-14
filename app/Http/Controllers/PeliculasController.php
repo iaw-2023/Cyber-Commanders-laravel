@@ -9,11 +9,6 @@ use App\Http\Requests\PeliculaStoreRequest;
 use App\Http\Requests\PeliculaUpdateRequest;
 
 
-/**
- * @OA\Info(title="API Peliculas", version="1.0")
- * 
- * @OA\Server(url="http://swagger.local")
- */
 class PeliculasController extends Controller
 {
     
@@ -86,6 +81,8 @@ class PeliculasController extends Controller
 
     /**
      * Display the specified resource.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Get(
      *      path="/ver_pelicula/{id}",
      *      tags="Pelicula",
@@ -104,6 +101,8 @@ class PeliculasController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Get(
      *      path="/editar_pelicula/{id}",
      *      tags="Pelicula",
@@ -122,6 +121,8 @@ class PeliculasController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Post(
      *      path="update_pelicula/{id}",
      *      tags="Pelicula",
@@ -152,6 +153,8 @@ class PeliculasController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Delete(
      *      path="destroy_pelicula/{id}",
      *      tags="Pelicula",

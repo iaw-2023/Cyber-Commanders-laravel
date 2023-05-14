@@ -8,12 +8,6 @@ use App\Models\Sala;
 use App\Http\Requests\SalaStoreRequest;
 use App\Http\Requests\SalaUpdateRequest;
 
-
-/**
- * @OA\Info(title="API Salas", version="1.0")
- * 
- * @OA\Server(url="http://swagger.local")
- */
 class SalasController extends Controller
 {
     
@@ -84,6 +78,8 @@ class SalasController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Get(
      *      path="/editar_sala/{id}",
      *      tags="Sala",
@@ -102,6 +98,8 @@ class SalasController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Post(
      *      path="update_sala/{id}",
      *      tags="Sala",
@@ -124,6 +122,8 @@ class SalasController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response 
      * @OA\Delete(
      *      path="destroy_sala/{id}",
      *      tags="Sala",
