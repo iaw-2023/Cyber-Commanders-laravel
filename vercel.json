@@ -19,7 +19,6 @@
         "APP_NAME": "Vercel Laravel IAW",
         "APP_ENV": "production",
         "APP_DEBUG": "true",
-        "NEXT_PUBLIC_SUPABASE_URL": "https://vxhbrvoxntfzyholqegd.supabase.co",
 
         
         "MAIL_DRIVER":"smtp",

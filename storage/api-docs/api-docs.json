@@ -1,0 +1,108 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Cine API ",
+        "version": "1.0"
+    },
+    "paths": {
+        "/rest/api/storeEntrada": {
+            "post": {
+                "tags": [
+                    "entradas"
+                ],
+                "summary": "Agrega una entrada para una funcion",
+                "operationId": "c88aac3653e8ae5959176fc7ef415a8a",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "funcion_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "A result object.",
+                                        "value": {
+                                            "success": true
+                                        }
+                                    },
+                                    "bool": {
+                                        "summary": "A boolean value.",
+                                        "value": false
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/api/extras": {
+            "get": {
+                "tags": [
+                    "extras"
+                ],
+                "summary": "Mostrar los extras",
+                "operationId": "a72e545c493de9fca14df038089d7d23",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los extras."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/api/funciones": {
+            "get": {
+                "tags": [
+                    "funciones"
+                ],
+                "summary": "Mostrar las funciones",
+                "operationId": "81bbda752f472d138a350ca3632b589a",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todas las funciones."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/api/peliculas": {
+            "get": {
+                "tags": [
+                    "peliculas"
+                ],
+                "summary": "Mostrar las peliculas",
+                "operationId": "60758877b76f0d224e93affea765cefb",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todas las peliculas."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    }
+}
