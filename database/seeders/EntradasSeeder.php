@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Entrada;
 
 class EntradasSeeder extends Seeder
 {
@@ -13,7 +14,8 @@ class EntradasSeeder extends Seeder
      */
     public function run(): void
     {
-        $entradas = [
+        Entrada::factory(25)->create();
+        /**$entradas = [
             ['funcion_id'=> 1],
             ['funcion_id'=> 1],
             ['funcion_id'=> 1],
@@ -21,5 +23,6 @@ class EntradasSeeder extends Seeder
         ];
         
         DB::table('entradas')->insert($entradas);
+        */
     }
 }

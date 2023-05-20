@@ -4,7 +4,11 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
+use App\Models\Sala;
+use App\Models\Pelicula;
+use App\Models\Funcion;
+
 
 class FuncionesSeeder extends Seeder
 {
@@ -13,21 +17,19 @@ class FuncionesSeeder extends Seeder
      */
     public function run(): void
     {
-
-
-        $fecha1 = Carbon::createFromFormat('Y-m-d H', '2023-04-21 22')->toDateTimeString(); // 1975-05-21 22:00:00
-        $fecha2 = Carbon::createFromFormat('Y-m-d H', '2023-04-22 22')->toDateTimeString(); // 1975-05-21 22:00:00
-        $fecha3 = Carbon::createFromFormat('Y-m-d H', '2023-04-23 22')->toDateTimeString(); // 1975-05-21 22:00:00
-
-
-        $funciones = [
-            ['fecha'=> $fecha1,'precio'=>800, 'pelicula_id' => 1,'sala_id'=> 1],
-            ['fecha'=> $fecha2,'precio'=>800,'pelicula_id' => 2,'sala_id'=> 3],
-            ['fecha'=> $fecha2,'precio'=>1200,'pelicula_id' => 3,'sala_id'=> 2],
-            ['fecha'=> $fecha3,'precio'=>1200,'pelicula_id' => 3,'sala_id'=> 2],
-        ];
-        
-        DB::table('funciones')->insert($funciones);
-
+        for($i=0; $i < 30; $i++){
+            for($j=0; $j < 4; $j++){
+                $pelicula = Pelicula::all()->random();
+                $fecha = Carbon::today()->addDays($i)->addHours(12+ (3*$j));
+                $fin = Carbon::today()->addDays($i)->addHours(12+ (3*$j))->addMinutes($pelicula->duracion); 
+                $funcion = new Funcion();
+                $funcion->precio = 100*rand(6,12);
+                $funcion->fecha = $fecha;
+                $funcion->fin = $fin;
+                $funcion->sala_id = Sala::all()->random()->id;
+                $funcion->pelicula_id = $pelicula->id;
+                $funcion->save();
+            }
+        }
     }
 }
