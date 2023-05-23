@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -35,6 +33,7 @@ Route::middleware('auth')->group(function () {
 
 //rutas de peliculas
 Route::middleware('auth')->group(function () {
+    Route::get('/', [PeliculasController::class, 'index'])->name('peliculas');
     Route::get('/peliculas', [PeliculasController::class, 'index'])->name('peliculas');
     Route::get('/crear_pelicula', [PeliculasController::class, 'create'])->name('crear_pelicula');
     Route::get('/editar_pelicula/{id}', [PeliculasController::class, 'edit'])->name('editar_pelicula');
