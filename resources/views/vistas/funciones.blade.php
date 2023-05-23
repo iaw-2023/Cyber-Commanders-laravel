@@ -7,7 +7,13 @@
 <div class="bg flex justify-center">
       <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Funciones</h1>
 </div>
-
+<a href="{{route('crear_funcion')}}">
+    <div class="m-5 flex justify-center">
+        <button class="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"> 
+            Agregar Funcion
+        </button>
+    </div>
+</a>
 <div class="m-2 w-2/3 flex">
     <form method="POST" action="{{route('indexMovie')}}">
         @csrf
@@ -87,11 +93,5 @@
          {{$funciones->links()}}
     </div>
 </div>
-    <a href="{{route('crear_funcion')}}">
-        <div class="m-5 flex justify-center">
-            <button class="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"> 
-                Agregar Funcion
-            </button>
-        </div>
-    </a>
+
 </x-app-layout>

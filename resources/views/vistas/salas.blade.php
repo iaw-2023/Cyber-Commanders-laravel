@@ -1,9 +1,5 @@
 
 <x-app-layout>
-<div class="bg flex justify-center">
-      <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Salas</h1>
-</div>
-
 
 @if(session()->has('exito'))
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
@@ -21,6 +17,18 @@
     </div>
 @endif
 
+
+<div class="bg flex justify-center">
+      <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Salas</h1>
+</div>
+
+<a href="{{route('crear_sala')}}">
+        <div class="m-5 flex justify-center">
+            <button class="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"> 
+                Agregar Sala
+            </button>
+        </div>
+    </a>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -71,11 +79,5 @@
         </tbody>
     </table>
 </div>
-    <a href="{{route('crear_sala')}}">
-        <div class="m-5 flex justify-center">
-            <button class="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"> 
-                Agregar Sala
-            </button>
-        </div>
-    </a>
+
 </x-app-layout>
