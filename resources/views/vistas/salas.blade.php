@@ -72,6 +72,11 @@
                             Editar
                         </button>
                     </a>
+                    <a href="{{route('show_funciones_sala', ['id' => $sala->id])}}">
+                            <button class="rounded border border-blue-500 bg-transparent m-2 px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white">
+                                Ver Funciones
+                            </button>
+                        </a>
                     </div>
                 </td>
             </tr>

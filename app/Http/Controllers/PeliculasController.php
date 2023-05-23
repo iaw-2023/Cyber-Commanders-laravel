@@ -45,12 +45,6 @@ class PeliculasController extends Controller
         return view('vistas.mostrar_pelicula')->with(compact('pelicula'));
     }
 
-    public function showFunciones(string $id)
-    {
-        $funciones = Funcion::where('pelicula_id',$id)->paginate(6);;
-        return view('vistas.mostrar_funciones_pelicula')->with(compact('funciones'));
-    }
-
   
     public function edit(string $id)
     {

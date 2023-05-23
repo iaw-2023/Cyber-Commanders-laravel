@@ -42,7 +42,6 @@ Route::middleware('auth')->group(function () {
     Route::post('update_pelicula/{id}' , [PeliculasController::class, 'update'])->name('update_pelicula');
     Route::delete('destroy_pelicula/{id}' , [PeliculasController::class, 'destroy'])->name('destroy_pelicula');
     Route::get('/ver_pelicula/{id}', [PeliculasController::class, 'show'])->name('ver_pelicula');
-    Route::get('/pelicula/{id}/funciones/', [PeliculasController::class, 'showFunciones'])->name('show_funciones');
 });
 
 
@@ -66,6 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::post('store_funcion' , [FuncionesController::class, 'store'])->name('store_funcion');
     Route::post('update_funcion/{id}' , [FuncionesController::class, 'update'])->name('update_funcion');
     Route::delete('destroy_funcion/{id}' , [FuncionesController::class, 'destroy'])->name('destroy_funcion');
+    Route::get('/pelicula/{id}/funciones/', [FuncionesController::class, 'showFuncionesPorPelicula'])->name('show_funciones_pelicula');
+    Route::get('/sala/{id}/funciones/', [FuncionesController::class, 'showFuncionesPorSala'])->name('show_funciones_sala');
 });
 
 

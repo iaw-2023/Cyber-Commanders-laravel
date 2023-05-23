@@ -5,7 +5,7 @@
     </div>
 @endif
 <div class="bg flex justify-center">
-      <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Funciones de : {{$nombre}}</h1>
+      <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Funciones en : {{$nombre}}</h1>
 </div>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -16,10 +16,10 @@
                     Fecha
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Precio
+                    Pelicula
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Sala
+                    Precio
                 </th>
             </tr>
         </thead>
@@ -30,14 +30,14 @@
                     {{$funcion->fecha}}
                 </th>
                 <td class="px-6 py-4">
-                    {{$funcion->precio}}
+                @if($funcion->pelicula!=null)
+                        {{$funcion->pelicula->nombre}}
+                    @else
+                        PELICULA BORRADA    
+                    @endif
                 </td>
                 <td class="px-6 py-4">
-                    @if($funcion->sala!=null)
-                        {{$funcion->sala->nombre}}
-                    @else
-                        SALA BORRADA    
-                    @endif
+                    {{$funcion->precio}}
                 </td>
             </tr>
             @endforeach

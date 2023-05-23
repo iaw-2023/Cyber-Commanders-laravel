@@ -104,4 +104,18 @@ class FuncionesController extends Controller
 
     }
 
+    public function showFuncionesPorPelicula(string $id)
+    {
+        $funciones = Funcion::where('pelicula_id',$id)->paginate(6);
+        $nombre = $funciones->first()->pelicula->nombre;  
+        return view('vistas.mostrar_funciones_pelicula')->with(compact('funciones','nombre'));
+    }
+
+    public function showFuncionesPorSala(string $id)
+    {
+        $funciones = Funcion::where('sala_id',$id)->paginate(6);
+        $nombre = $funciones->first()->sala->nombre;  
+        return view('vistas.mostrar_funciones_sala')->with(compact('funciones','nombre'));
+    }
+
 }
