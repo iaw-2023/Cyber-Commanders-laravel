@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pelicula;
+use App\Models\Funcion;
 use App\Http\Requests\PeliculaStoreRequest;
 use App\Http\Requests\PeliculaUpdateRequest;
 
@@ -42,6 +43,12 @@ class PeliculasController extends Controller
     {
         $pelicula = Pelicula::findOrFail($id);
         return view('vistas.mostrar_pelicula')->with(compact('pelicula'));
+    }
+
+    public function showFunciones(string $id)
+    {
+        $funciones = Funcion::where('pelicula_id',$id)->paginate(6);;
+        return view('vistas.mostrar_funciones_pelicula')->with(compact('funciones'));
     }
 
   

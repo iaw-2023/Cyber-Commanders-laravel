@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::post('update_pelicula/{id}' , [PeliculasController::class, 'update'])->name('update_pelicula');
     Route::delete('destroy_pelicula/{id}' , [PeliculasController::class, 'destroy'])->name('destroy_pelicula');
     Route::get('/ver_pelicula/{id}', [PeliculasController::class, 'show'])->name('ver_pelicula');
+    Route::get('/pelicula/{id}/funciones/', [PeliculasController::class, 'showFunciones'])->name('show_funciones');
 });
 
 
