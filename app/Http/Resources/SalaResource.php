@@ -14,6 +14,10 @@ class SalaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return[
+            'sala' => $this->nombre,
+            'tipo' => $this->tipo, 
+            'capacidad' => $this->capacidad,
+        ];
     }
 }
