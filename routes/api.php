@@ -18,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('api/extras', [ExtrasController::class, 'indexApi']);
+Route::get('api/funciones', [FuncionesController::class, 'indexApi']);
+Route::get('api/pelicula/funciones/{id}', [FuncionesController::class, 'indexMovieApi']);
+Route::get('api/peliculas', [PeliculasController::class, 'indexApi']);
+Route::post('api/storeEntrada', [EntradasController::class, 'addExtra']);
