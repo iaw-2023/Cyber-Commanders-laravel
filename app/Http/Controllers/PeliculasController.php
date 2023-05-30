@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pelicula;
-use App\Models\Funcion;
 use App\Http\Requests\PeliculaStoreRequest;
 use App\Http\Requests\PeliculaUpdateRequest;
 
@@ -13,6 +12,30 @@ use App\Http\Requests\PeliculaUpdateRequest;
 class PeliculasController extends Controller
 {
     
+/**
+ * @return \Illuminate\Http\Response
+ *
+ * @OA\Get(
+ *     path="/rest/api/peliculas/{id}",
+ *     tags={"peliculas"},
+ *     summary="Mostrar las peliculas",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Mostrar todas las peliculas."
+ *     ),
+ *     @OA\Response(
+ *         response="default",
+ *         description="Ha ocurrido un error."
+ *     )
+ * ) 
+ */
+    public function indexApi()
+    {
+        $peliculas = Pelicula::all();
+        return $peliculas;
+    }
+
+
     public function index()
     {
         $peliculas = Pelicula::paginate(10);
@@ -20,14 +43,14 @@ class PeliculasController extends Controller
         return view('vistas.peliculas')->with(compact('peliculas'));
     }
 
-   
+ 
     public function create()
     {
         
         return view('vistas.crear_pelicula');
     }
 
-  
+
     public function store(PeliculaStoreRequest $request)
     {
         $pelicula = new Pelicula();
@@ -39,20 +62,21 @@ class PeliculasController extends Controller
         return redirect()->route('peliculas')->with('message', 'Pelicula creada correctamente!');
     }
 
+  
     public function show(string $id)
     {
         $pelicula = Pelicula::findOrFail($id);
         return view('vistas.mostrar_pelicula')->with(compact('pelicula'));
     }
 
-  
+ 
     public function edit(string $id)
     {
         $pelicula = Pelicula::findOrFail($id);
         return view('vistas.editar_pelicula')->with(compact('pelicula'));
     }
 
-   
+  
     public function update(PeliculaUpdateRequest $request, string $id)
     {
         $pelicula = Pelicula::findOrFail($id);
@@ -64,7 +88,7 @@ class PeliculasController extends Controller
         //
     }
 
-   
+  
     public function destroy(string $id)
     {
         $pelicula = Pelicula::findOrFail($id);
