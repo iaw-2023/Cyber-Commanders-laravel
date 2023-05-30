@@ -39,7 +39,6 @@ class FuncionUpdateRequest extends FormRequest
     }
 
 }
-
-//Funcion::where('fecha','<=','2023-10-11 21:11:00')->where('fin','>=','2023-10-11 23:02:00')->count()  
+ 
 
 
