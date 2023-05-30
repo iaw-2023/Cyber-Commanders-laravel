@@ -20,6 +20,7 @@ class Entrada extends Model
 
     public function extras(): BelongsToMany
     {
-        return $this->belongsToMany(Extra::class, 'extras_entradas', 'extras_id', 'entradas_id');
+        return $this->belongsToMany(Extra::class, 'extras_entradas', 'entradas_id', 'extras_id')
+        ->withPivot('cantidad');
     }
 }
