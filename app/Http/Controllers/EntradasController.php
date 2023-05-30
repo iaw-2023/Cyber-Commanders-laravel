@@ -21,7 +21,7 @@ class EntradasController extends Controller
 
 /**
  * @OA\Post(
- *     path="/rest/api/storeEntrada",
+ *     path="/rest/storeEntrada",
  *     description="Guarda una nueva entrada asociada a una funcion y ciertos productos. Para agregar
  *      elementos al arreglo de extras se debe copiar y pegar el contenido encerrado por llaves",
  *     tags={"entradas"},

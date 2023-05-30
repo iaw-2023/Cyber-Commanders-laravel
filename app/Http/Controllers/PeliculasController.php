@@ -16,7 +16,7 @@ class PeliculasController extends Controller
  * @return \Illuminate\Http\Response
  *
  * @OA\Get(
- *     path="/rest/api/peliculas/{id}",
+ *     path="/rest/api/peliculas",
  *     tags={"peliculas"},
  *     summary="Mostrar las peliculas",
  *     @OA\Response(

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Extra;
 use App\Http\Requests\ExtraStoreRequest;
 use App\Http\Requests\ExtraUpdateRequest;

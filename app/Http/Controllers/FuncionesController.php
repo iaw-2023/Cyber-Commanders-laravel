@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\FuncionStoreRequest;
 use App\Http\Requests\FuncionUpdateRequest;
 use App\Http\Resources\FuncionResource;
-use App\Http\Resources\PeliculaResource;
+
 
 class FuncionesController extends Controller
 {
@@ -20,7 +20,7 @@ class FuncionesController extends Controller
  * @return \Illuminate\Http\Response
  *
  * @OA\Get(
- *     path="/rest/api/funciones",
+ *     path="/rest/funciones",
  *     tags={"funciones"},
  *     summary="Mostrar las funciones",
  *     @OA\Response(
@@ -41,7 +41,7 @@ class FuncionesController extends Controller
 
     /**
      * @OA\Get(
-     *    path="/rest/api/pelicula/funciones/{id}",
+     *    path="/rest/pelicula/funciones/{id}",
      *    operationId="pelicula/funciones",
      *    tags={"Pelicula/funciones"},
      *    description="Obtiene el listado de funciones por",
