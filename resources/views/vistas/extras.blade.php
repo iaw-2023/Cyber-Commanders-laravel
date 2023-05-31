@@ -16,7 +16,7 @@
     </a>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -36,17 +36,17 @@
         <tbody>
             @foreach($extras as $extra)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{$extra->producto}}
-                </th>
+                </td>
                 <td class="px-6 py-4">
                     {{$extra->tamaño}}
                 </td>
                 <td class="px-6 py-4">
                     {{$extra->precio}}
                 </td>
-                <td class="px-6 py-4">
-                    <div class="flex">
+                <td class="px-6 py-4 ">
+                    <div class="flex justify-center">
                     <form method="POST" action="{{ route('destroy_extra', ['id' => $extra->id] ) }}">
                         @csrf
                         @method('DELETE')
