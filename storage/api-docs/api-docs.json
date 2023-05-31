@@ -10,8 +10,8 @@
                 "tags": [
                     "entradas"
                 ],
-                "description": "Guarda una nueva entrada asociada a una funcion y ciertos productos. Para agregar\n *      elementos al arreglo de extras se debe copiar y pegar el contenido encerrado por llaves",
-                "operationId": "a1717867f45cd4b2dae9ad167d2f81f7",
+                "description": "Guarda una nueva entrada asociada a una funcion y ciertos productos. Para agregar elementos al arreglo de extras se debe copiar y pegar el contenido encerrado por llaves",
+                "operationId": "a24898b4d8c4a4552a61d2e9cbc0755f",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -48,7 +48,7 @@
                         }
                     },
                     "422": {
-                        "description": "Error",
+                        "description": "Error: Unprocessable Content. Algun parametro no es valido",
                         "content": {
                             "application/json": {}
                         }
@@ -110,6 +110,12 @@
                 "responses": {
                     "200": {
                         "description": "Success"
+                    },
+                    "404": {
+                        "description": "No se encontraron funciones para la pelicula solicitada, o la misma no existe en el sistema."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
                     }
                 }
             }
@@ -123,7 +129,7 @@
                 "operationId": "92997b9c2670cc1daab09095373584b1",
                 "responses": {
                     "200": {
-                        "description": "Mostrar todas las peliculas."
+                        "description": "Exito. Se muestran todas las peliculas."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."

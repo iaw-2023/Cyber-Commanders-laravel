@@ -22,8 +22,7 @@ class EntradasController extends Controller
 /**
  * @OA\Post(
  *     path="/rest/storeEntrada",
- *     description="Guarda una nueva entrada asociada a una funcion y ciertos productos. Para agregar
- *      elementos al arreglo de extras se debe copiar y pegar el contenido encerrado por llaves",
+ *     description="Guarda una nueva entrada asociada a una funcion y ciertos productos. Para agregar elementos al arreglo de extras se debe copiar y pegar el contenido encerrado por llaves",
  *     tags={"entradas"},
  *     @OA\RequestBody(
  *         @OA\MediaType(
@@ -51,7 +50,7 @@ class EntradasController extends Controller
  *     ),
  *     @OA\Response(
  *         response=422,
- *         description="Error",
+ *         description="Error: Unprocessable Content. Algun parametro no es valido",
  *         @OA\MediaType(
  *             mediaType="application/json"
  *         )
@@ -61,14 +60,14 @@ class EntradasController extends Controller
  */
     public function storeEntrada(EntradaStoreRequest $request)
     { 
-         //   $entrada = new Entrada();
-           // $funcion = Funcion::findOrFail($request->funcion_id);
-           // $entrada->funcion_id = $funcion->id;
-           // $extras = $request->extras;
-           // $entrada-> save();
-          //  foreach($extras as $extra){
-           //    $entrada->extras()->attach($extra['id'], ['cantidad' => $extra['cantidad']]);
-           // }
+            $entrada = new Entrada();
+            $funcion = Funcion::findOrFail($request->funcion_id);
+            $entrada->funcion_id = $funcion->id;
+            $extras = $request->extras;
+            $entrada-> save();
+            foreach($extras as $extra){
+               $entrada->extras()->attach($extra['id'], ['cantidad' => $extra['cantidad']]);
+            }
             return $request;
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\FuncionStoreRequest;
 use App\Http\Requests\FuncionUpdateRequest;
 use App\Http\Resources\FuncionResource;
-
+use Illuminate\Http\Response;
 
 class FuncionesController extends Controller
 {
@@ -50,13 +50,23 @@ class FuncionesController extends Controller
      *    ),
      *     @OA\Response(
      *          response=200, description="Success",
-     *       )
+     *       ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="No se encontraron funciones para la pelicula solicitada, o la misma no existe en el sistema."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
      *  )
      */
     public function indexMovieApi(int $id){
-        //$pelicula = Pelicula::findOrFail($id);
-       //return $pelicula->funciones;
-       return FuncionResource::collection(Pelicula::findOrFail($id)->funciones);
+        $pelicula = Pelicula::find($id);
+        if ($pelicula === null) {
+            return response("Pelicula {$id} not found", Response::HTTP_NOT_FOUND);
+        }
+       return FuncionResource::collection($pelicula->funciones);
     }
 
     public function index()
@@ -105,15 +115,6 @@ class FuncionesController extends Controller
         $funcion->save();
         return redirect()->route('funciones')->with('message', 'Funcion creada correctamente!');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
  
     public function edit(string $id)
     {

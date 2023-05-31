@@ -55,13 +55,6 @@ class ExtrasController extends Controller
         return redirect()->route('extras')->with('message', 'Extra creado correctamente!');
     }
 
-   
-    public function show(string $id)
-    {
-        //
-    }
-
-   
     public function edit(string $id)
     {
         $extra= Extra::findOrFail($id);
