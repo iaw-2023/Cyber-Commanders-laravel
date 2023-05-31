@@ -24,6 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('extras', [ExtrasController::class, 'indexApi']);
 Route::get('funciones', [FuncionesController::class, 'indexApi']);
-Route::get('pelicula/funciones/{id}', [FuncionesController::class, 'indexMovieApi']);
+Route::get('funciones/pelicula/{id}', [FuncionesController::class, 'indexMovieApi']);
 Route::get('peliculas', [PeliculasController::class, 'indexApi']);
 Route::post('storeEntrada', [EntradasController::class, 'storeEntrada']);

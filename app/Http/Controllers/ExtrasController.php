@@ -20,7 +20,7 @@ class ExtrasController extends Controller
  *     summary="Mostrar los extras",
  *     @OA\Response(
  *         response=200,
- *         description="Mostrar todas las peliculas."
+ *         description="Operacion exitosa."
  *     ),
  *     @OA\Response(
  *         response="default",

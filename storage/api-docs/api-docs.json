@@ -10,6 +10,7 @@
                 "tags": [
                     "entradas"
                 ],
+                "summary": "Crear una nueva entrada",
                 "description": "Guarda una nueva entrada asociada a una funcion y ciertos productos. Para agregar elementos al arreglo de extras se debe copiar y pegar el contenido encerrado por llaves",
                 "operationId": "a24898b4d8c4a4552a61d2e9cbc0755f",
                 "requestBody": {
@@ -42,7 +43,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Exito",
+                        "description": "Operacion exitosa",
                         "content": {
                             "application/json": {}
                         }
@@ -65,7 +66,7 @@
                 "operationId": "1555eac22d353a278304109ef46a4a8c",
                 "responses": {
                     "200": {
-                        "description": "Mostrar todas las peliculas."
+                        "description": "Operacion exitosa."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."
@@ -82,7 +83,7 @@
                 "operationId": "102089d5d61aae063077228eaac5fabc",
                 "responses": {
                     "200": {
-                        "description": "Mostrar todas las funciones."
+                        "description": "Operacion exitosa."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."
@@ -90,13 +91,14 @@
                 }
             }
         },
-        "/rest/pelicula/funciones/{id}": {
+        "/rest/funciones/pelicula/{id}": {
             "get": {
                 "tags": [
-                    "Pelicula/funciones"
+                    "funciones/pelicula"
                 ],
-                "description": "Obtiene el listado de funciones por",
-                "operationId": "pelicula/funciones",
+                "summary": "Mostrar las funciones de una pelicula",
+                "description": "Obtiene el listado de funciones de una pelicula determinada",
+                "operationId": "6c2fe5cc4b9cee1cd9fd6879b9219654",
                 "parameters": [
                     {
                         "name": "id",
@@ -109,7 +111,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success"
+                        "description": "Operacion exitosa"
                     },
                     "404": {
                         "description": "No se encontraron funciones para la pelicula solicitada, o la misma no existe en el sistema."
@@ -129,7 +131,7 @@
                 "operationId": "92997b9c2670cc1daab09095373584b1",
                 "responses": {
                     "200": {
-                        "description": "Exito. Se muestran todas las peliculas."
+                        "description": "Operacion exitosa."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."

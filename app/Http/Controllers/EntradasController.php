@@ -23,6 +23,7 @@ class EntradasController extends Controller
  * @OA\Post(
  *     path="/rest/storeEntrada",
  *     description="Guarda una nueva entrada asociada a una funcion y ciertos productos. Para agregar elementos al arreglo de extras se debe copiar y pegar el contenido encerrado por llaves",
+ *     summary="Crear una nueva entrada",
  *     tags={"entradas"},
  *     @OA\RequestBody(
  *         @OA\MediaType(
@@ -43,7 +44,7 @@ class EntradasController extends Controller
  *     ),
  *     @OA\Response(
  *         response=200,
- *         description="Exito",
+ *         description="Operacion exitosa",
  *         @OA\MediaType(
  *             mediaType="application/json"
  *         )

@@ -25,7 +25,7 @@ class FuncionesController extends Controller
  *     summary="Mostrar las funciones",
  *     @OA\Response(
  *         response=200,
- *         description="Mostrar todas las funciones."
+ *         description="Operacion exitosa."
  *     ),
  *     @OA\Response(
  *         response="default",
@@ -41,15 +41,15 @@ class FuncionesController extends Controller
 
     /**
      * @OA\Get(
-     *    path="/rest/pelicula/funciones/{id}",
-     *    operationId="pelicula/funciones",
-     *    tags={"Pelicula/funciones"},
-     *    description="Obtiene el listado de funciones por",
+     *    path="/rest/funciones/pelicula/{id}",
+     *    tags={"funciones/pelicula"},
+     *    summary="Mostrar las funciones de una pelicula",
+     *    description="Obtiene el listado de funciones de una pelicula determinada",
      *    @OA\Parameter(name="id",in="path", required=true,
      *        @OA\Schema(type="integer")
      *    ),
      *     @OA\Response(
-     *          response=200, description="Success",
+     *          response=200, description="Operacion exitosa",
      *       ),
      *     @OA\Response(
      *         response=404,

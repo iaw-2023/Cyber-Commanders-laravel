@@ -21,7 +21,7 @@ class PeliculasController extends Controller
  *     summary="Mostrar las peliculas",
  *     @OA\Response(
  *         response=200,
- *         description="Exito. Se muestran todas las peliculas."
+ *         description="Operacion exitosa."
  *     ),
  *     @OA\Response(
  *         response="default",
