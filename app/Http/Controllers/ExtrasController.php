@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Extra;
 use App\Http\Requests\ExtraStoreRequest;
 use App\Http\Requests\ExtraUpdateRequest;
-use App\http\Resources\ExtraResource;
+use App\Http\Resources\ExtraResource;
 
 
 class ExtrasController extends Controller
