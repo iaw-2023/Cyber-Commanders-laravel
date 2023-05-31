@@ -59,16 +59,16 @@ class EntradasController extends Controller
  *
  * )
  */
-    public function storeApi(EntradaStoreRequest $request)
+    public function storeEntrada(EntradaStoreRequest $request)
     { 
-            $entrada = new Entrada();
-            $funcion = Funcion::findOrFail($request->funcion_id);
-            $entrada->funcion_id = $funcion->id;
-            $extras = $request->extras;
-            $entrada-> save();
-            foreach($extras as $extra){
-               $entrada->extras()->attach($extra['id'], ['cantidad' => $extra['cantidad']]);
-            }
-            return $request->funcion_id;
+         //   $entrada = new Entrada();
+           // $funcion = Funcion::findOrFail($request->funcion_id);
+           // $entrada->funcion_id = $funcion->id;
+           // $extras = $request->extras;
+           // $entrada-> save();
+          //  foreach($extras as $extra){
+           //    $entrada->extras()->attach($extra['id'], ['cantidad' => $extra['cantidad']]);
+           // }
+            return $request;
     }
 }

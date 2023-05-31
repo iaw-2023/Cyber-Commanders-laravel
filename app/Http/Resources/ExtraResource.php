@@ -5,9 +5,10 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PeliculaResource extends JsonResource
+
+class ExtraResource extends JsonResource
 {
-       /**
+    /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
@@ -16,9 +17,9 @@ class PeliculaResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'duracion' => $this->duracion,
-            'nombre' => $this->nombre,
-            'poster' => $this->poster,
+            'producto' => $this->producto,
+            'tamaño' => $this->tamaño,
+            'precio' => $this->precio,
         ];
     }
 }

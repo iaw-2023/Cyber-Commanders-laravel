@@ -6,11 +6,32 @@ use App\Http\Controllers\Controller;
 use App\Models\Extra;
 use App\Http\Requests\ExtraStoreRequest;
 use App\Http\Requests\ExtraUpdateRequest;
+use App\http\Resources\ExtraResource;
 
 
 class ExtrasController extends Controller
 {
-    
+    /**
+ * @return \Illuminate\Http\Response
+ *
+ * @OA\Get(
+ *     path="/rest/extras",
+ *     tags={"extras"},
+ *     summary="Mostrar los extras",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Mostrar todas las peliculas."
+ *     ),
+ *     @OA\Response(
+ *         response="default",
+ *         description="Ha ocurrido un error."
+ *     )
+ * ) 
+ */
+    public function indexApi()
+    {
+        return ExtraResource::collection(Extra::all());
+    }
 
     public function index()
     {

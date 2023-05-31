@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Resources\PeliculaResource;
 use App\Models\Pelicula;
 use App\Http\Requests\PeliculaStoreRequest;
 use App\Http\Requests\PeliculaUpdateRequest;
@@ -16,7 +16,7 @@ class PeliculasController extends Controller
  * @return \Illuminate\Http\Response
  *
  * @OA\Get(
- *     path="/rest/api/peliculas",
+ *     path="/rest/peliculas",
  *     tags={"peliculas"},
  *     summary="Mostrar las peliculas",
  *     @OA\Response(
@@ -31,8 +31,7 @@ class PeliculasController extends Controller
  */
     public function indexApi()
     {
-        $peliculas = Pelicula::all();
-        return $peliculas;
+        return PeliculaResource::collection(Pelicula::all());
     }
 
 

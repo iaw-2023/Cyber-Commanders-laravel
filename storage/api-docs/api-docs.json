@@ -5,13 +5,13 @@
         "version": "1.0"
     },
     "paths": {
-        "/rest/api/storeEntrada": {
+        "/rest/storeEntrada": {
             "post": {
                 "tags": [
                     "entradas"
                 ],
                 "description": "Guarda una nueva entrada asociada a una funcion y ciertos productos. Para agregar\n *      elementos al arreglo de extras se debe copiar y pegar el contenido encerrado por llaves",
-                "operationId": "c88aac3653e8ae5959176fc7ef415a8a",
+                "operationId": "a1717867f45cd4b2dae9ad167d2f81f7",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -56,13 +56,30 @@
                 }
             }
         },
-        "/rest/api/funciones": {
+        "/rest/extras": {
+            "get": {
+                "tags": [
+                    "extras"
+                ],
+                "summary": "Mostrar los extras",
+                "operationId": "1555eac22d353a278304109ef46a4a8c",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todas las peliculas."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/funciones": {
             "get": {
                 "tags": [
                     "funciones"
                 ],
                 "summary": "Mostrar las funciones",
-                "operationId": "81bbda752f472d138a350ca3632b589a",
+                "operationId": "102089d5d61aae063077228eaac5fabc",
                 "responses": {
                     "200": {
                         "description": "Mostrar todas las funciones."
@@ -73,7 +90,7 @@
                 }
             }
         },
-        "/rest/api/pelicula/funciones/{id}": {
+        "/rest/pelicula/funciones/{id}": {
             "get": {
                 "tags": [
                     "Pelicula/funciones"
@@ -97,13 +114,13 @@
                 }
             }
         },
-        "/rest/api/peliculas": {
+        "/rest/peliculas": {
             "get": {
                 "tags": [
                     "peliculas"
                 ],
                 "summary": "Mostrar las peliculas",
-                "operationId": "60758877b76f0d224e93affea765cefb",
+                "operationId": "92997b9c2670cc1daab09095373584b1",
                 "responses": {
                     "200": {
                         "description": "Mostrar todas las peliculas."

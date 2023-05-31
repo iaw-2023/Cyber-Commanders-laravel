@@ -10,6 +10,7 @@ class Pelicula extends Model
 {
     use HasFactory;
     protected $table = 'peliculas' ;
+    protected $hidden = ['created_at','updated_at'];
 
     public function funciones(): HasMany
     {

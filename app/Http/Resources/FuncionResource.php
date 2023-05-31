@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\PeliculaResource;
 use App\Models\Pelicula;
 use App\Models\Sala;
 
@@ -15,7 +16,7 @@ class FuncionResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {
+    {  
         return [
             'inicio' => $this->fecha,
             'precio' => $this->precio,

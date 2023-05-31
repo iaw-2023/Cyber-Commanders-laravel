@@ -54,8 +54,9 @@ class FuncionesController extends Controller
      *  )
      */
     public function indexMovieApi(int $id){
-        $pelicula = Pelicula::findOrFail($id);
-        return $pelicula->funciones;
+        //$pelicula = Pelicula::findOrFail($id);
+       //return $pelicula->funciones;
+       return FuncionResource::collection(Pelicula::findOrFail($id)->funciones);
     }
 
     public function index()
