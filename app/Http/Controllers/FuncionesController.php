@@ -64,7 +64,7 @@ class FuncionesController extends Controller
     public function indexMovieApi(int $id){
         $pelicula = Pelicula::find($id);
         if ($pelicula === null) {
-            return response("Pelicula {$id} not found", Response::HTTP_NOT_FOUND);
+            return response()->json(['success'=>'false','message' => 'No se encontraron funciones para la pelicula solicitada, o la misma no existe en el sistema.'], 404);
         }
        return FuncionResource::collection($pelicula->funciones);
     }

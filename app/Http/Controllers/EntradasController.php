@@ -69,6 +69,6 @@ class EntradasController extends Controller
             foreach($extras as $extra){
                $entrada->extras()->attach($extra['id'], ['cantidad' => $extra['cantidad']]);
             }
-            return $request;
+            return response()->json(['success'=>'true','message' => 'Operacion Exitosa.'], 200);
     }
 }
