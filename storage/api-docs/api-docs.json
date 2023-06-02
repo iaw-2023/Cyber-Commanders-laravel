@@ -122,6 +122,37 @@
                 }
             }
         },
+        "/rest/funciones/sala/{id}": {
+            "get": {
+                "tags": [
+                    "funciones/sala"
+                ],
+                "summary": "Mostrar las funciones de una sala",
+                "description": "Obtiene el listado de funciones para una sala determinada",
+                "operationId": "25ce48fd78319ac8c60cc764062f0ef2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operacion exitosa"
+                    },
+                    "404": {
+                        "description": "No se encontraron funciones para la pelicula solicitada, o la misma no existe en el sistema."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
         "/rest/peliculas": {
             "get": {
                 "tags": [
@@ -129,6 +160,23 @@
                 ],
                 "summary": "Mostrar las peliculas",
                 "operationId": "92997b9c2670cc1daab09095373584b1",
+                "responses": {
+                    "200": {
+                        "description": "Operacion exitosa."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/salas": {
+            "get": {
+                "tags": [
+                    "salas"
+                ],
+                "summary": "Mostrar las salas",
+                "operationId": "a881762f3e06f35d27ccb440ce409ad8",
                 "responses": {
                     "200": {
                         "description": "Operacion exitosa."

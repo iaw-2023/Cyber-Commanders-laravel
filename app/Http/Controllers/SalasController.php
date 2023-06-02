@@ -11,7 +11,28 @@ use App\Http\Requests\SalaUpdateRequest;
 class SalasController extends Controller
 {
     
-   
+    /**
+ * @return \Illuminate\Http\Response
+ *
+ * @OA\Get(
+ *     path="/rest/salas",
+ *     tags={"salas"},
+ *     summary="Mostrar las salas",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Operacion exitosa."
+ *     ),
+ *     @OA\Response(
+ *         response="default",
+ *         description="Ha ocurrido un error."
+ *     )
+ * ) 
+ */  
+    public function indexApi()
+    {
+        return Sala::all()->makeVisible(['id']);;
+    }
+
     public function index()
     {
         $salas = Sala::all();
@@ -33,12 +54,6 @@ class SalasController extends Controller
         $sala->tipo = $request->tipo;
         $sala->save();
         return redirect()->route('salas')->with('exito', 'Sala creada correctamente!');
-    }
-
-  
-    public function show(string $id)
-    {
-        //
     }
 
    
