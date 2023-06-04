@@ -15,6 +15,7 @@ class SalaResource extends JsonResource
     public function toArray(Request $request): array
     {
         return[
+            'id' => $this->id,
             'sala' => $this->nombre,
             'tipo' => $this->tipo, 
             'capacidad' => $this->capacidad,
