@@ -35,7 +35,7 @@ class FuncionesController extends Controller
      */
     public function indexApi()
     {
-        return FuncionResource::collection(Funcion::paginate());
+        return FuncionResource::collection(Funcion::all());
     }
 
 
@@ -100,7 +100,7 @@ class FuncionesController extends Controller
         if ($sala === null) {
             return response()->json(['success' => 'false', 'message' => 'No se encontraron funciones para la sala solicitada, o la misma no existe en el sistema.'], 404);
         }
-        return ($sala->funciones)->makeHidden(['created_at','updated_at']);
+        return FuncionResource::collection(($sala->funciones)->makeHidden(['created_at','updated_at']));
     }
 
     public function index()
