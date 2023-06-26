@@ -36,7 +36,7 @@ class FuncionesController extends Controller
     public function indexApi()
     {
         $ahora = Carbon::now();  
-        return FuncionResource::collection(Funcion::where('fecha','>',$ahora)->get());
+        return FuncionResource::collection(Funcion::where('fecha','>',$ahora)->orderBy('fecha', 'asc')->get());
     }
 
 
@@ -69,7 +69,7 @@ class FuncionesController extends Controller
             return response()->json(['success' => 'false', 'message' => 'No se encontraron funciones para la pelicula solicitada, o la misma no existe en el sistema.'], 404);
         }
         $ahora = Carbon::now();  
-        return FuncionResource::collection($pelicula->funciones()->where('fecha', '>', $ahora)->get());
+        return FuncionResource::collection($pelicula->funciones()->where('fecha', '>', $ahora)->orderBy('fecha', 'asc')->get());
     }
 
 
@@ -104,7 +104,7 @@ class FuncionesController extends Controller
         }
         $ahora = Carbon::now();  
         
-        return FuncionResource::collection(($sala->funciones()->where('fecha', '>', $ahora)->get())->makeHidden(['created_at','updated_at']));
+        return FuncionResource::collection(($sala->funciones()->where('fecha', '>', $ahora)->orderBy('fecha', 'asc')->get())->makeHidden(['created_at','updated_at']));
     }
 
     public function index()
