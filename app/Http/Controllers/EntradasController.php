@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Funcion;
 use App\Models\Entrada;
 use App\Http\Requests\EntradaStoreRequest;
+use Illuminate\Support\Facades\Validator;
 
 
 class EntradasController extends Controller
@@ -63,6 +64,9 @@ class EntradasController extends Controller
     { 
             $entrada = new Entrada();
             $funcion = Funcion::findOrFail($request->funcion_id);
+
+           
+
             $entrada->funcion_id = $funcion->id;
             $extras = $request->extras;
             $entrada-> save();

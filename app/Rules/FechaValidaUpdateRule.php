@@ -37,8 +37,7 @@ class FechaValidaUpdateRule implements DataAwareRule, ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        //dump($this);
-        //dump(data);
+
         $pelicula_id=Arr::get($this->data,'pelicula');
         $fecha=Arr::get($this->data,'fecha');
         $sala_id=Arr::get($this->data,'sala');
