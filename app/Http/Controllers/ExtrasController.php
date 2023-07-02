@@ -3,62 +3,48 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Extra;
 use App\Http\Requests\ExtraStoreRequest;
 use App\Http\Requests\ExtraUpdateRequest;
+use App\Http\Resources\ExtraResource;
 
 
 class ExtrasController extends Controller
 {
-    
     /**
-     * Display a listing of the resource.
-     * @OA\Get(
-     *      path="/extras",
-     *      tags="Extras",
-     *      summary="Retorna los extras existentes."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
+ * @return \Illuminate\Http\Response
+ *
+ * @OA\Get(
+ *     path="/rest/extras",
+ *     tags={"extras"},
+ *     summary="Mostrar los extras",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Operacion exitosa."
+ *     ),
+ *     @OA\Response(
+ *         response="default",
+ *         description="Ha ocurrido un error."
+ *     )
+ * ) 
+ */
+    public function indexApi()
+    {
+        return ExtraResource::collection(Extra::all());
+    }
+
     public function index()
     {
         $extras = Extra::all();
         return view('vistas.extras')->with(compact('extras'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @OA\Get(
-     *      path="/crear_extra",
-     *      tags="Extras",
-     *      summary="Crea un extra con sus respectivos detalles."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
     public function create()
     {
         return view('vistas.crear_extra');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @OA\Post(
-     *      path="store_extra",
-     *      tags="Extras",
-     *      summary="Guarda un extra creado con sus respectivos detalles."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
+   
     public function store(ExtraStoreRequest $request)
     {
         $extra = new Extra();
@@ -69,48 +55,13 @@ class ExtrasController extends Controller
         return redirect()->route('extras')->with('message', 'Extra creado correctamente!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param  int  $id
-     * @return \Illuminate\Http\Response 
-     * @OA\Get(
-     *      path="/editar_extra/{id}",
-     *      tags="Extras",
-     *      summary="Obtiene un extra por id y permite editarlo."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
     public function edit(string $id)
     {
         $extra= Extra::findOrFail($id);
         return view('vistas.editar_extra')->with(compact('extra','id'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param  int  $id
-     * @return \Illuminate\Http\Response 
-     * @OA\Post(
-     *      path="update_extra/{id}",
-     *      tags="Extras",
-     *      summary="Obtiene un extra por id y permite actualizarlo."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
+   
     public function update(ExtraUpdateRequest $request, string $id)
     {
         $extra = Extra::findOrFail($id);
@@ -121,20 +72,7 @@ class ExtrasController extends Controller
         return redirect()->route('extras')->with('message', 'Extra editado correctamente!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param  int  $id
-     * @return \Illuminate\Http\Response 
-     * @OA\Delete(
-     *      path="destroy_extra/{id}",
-     *      tags="Extras",
-     *      summary="Busca un extra por id y permite eliminarlo."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
+   
     public function destroy(string $id)
     {
         $extra = Extra::findOrFail($id);

@@ -1,9 +1,5 @@
 
 <x-app-layout>
-<div class="bg flex justify-center">
-      <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Salas</h1>
-</div>
-
 
 @if(session()->has('exito'))
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
@@ -22,8 +18,20 @@
 @endif
 
 
+<div class="bg flex justify-center">
+      <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Salas</h1>
+</div>
+
+<a href="{{route('crear_sala')}}">
+        <div class="m-5 flex justify-center">
+            <button class="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"> 
+                Agregar Sala
+            </button>
+        </div>
+    </a>
+
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -53,7 +61,7 @@
                     {{$sala->capacidad}}
                 </td>
                 <td class="px-6 py-4">
-                    <div class="flex">
+                    <div class="flex justify-center">
                     <form method="POST" action="{{ route('destroy_sala', ['id' => $sala->id] ) }}">
                         @csrf
                         @method('DELETE')
@@ -64,6 +72,11 @@
                             Editar
                         </button>
                     </a>
+                    <a href="{{route('show_funciones_sala', ['id' => $sala->id])}}">
+                            <button class="rounded border border-blue-500 bg-transparent m-2 px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white">
+                                Ver Funciones
+                            </button>
+                        </a>
                     </div>
                 </td>
             </tr>
@@ -71,11 +84,5 @@
         </tbody>
     </table>
 </div>
-    <a href="{{route('crear_sala')}}">
-        <div class="m-5 flex justify-center">
-            <button class="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"> 
-                Agregar Sala
-            </button>
-        </div>
-    </a>
+
 </x-app-layout>

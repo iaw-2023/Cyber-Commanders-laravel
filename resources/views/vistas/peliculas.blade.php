@@ -9,9 +9,15 @@
     </div>
 @endif
 
-
+<a href="{{route('crear_pelicula')}}">
+        <div class="m-5 flex justify-center">
+            <button class="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"> 
+                Agregar Pelicula
+            </button>
+        </div>
+</a>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <table class="w-full text-sm text-center content-center text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -27,15 +33,15 @@
         </thead>
         <tbody>
             @foreach($peliculas as $pelicula)
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <tr class="bg-white border-b text-center content-center dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{$pelicula->nombre}}
-                </th>
+                </td>
                 <td class="px-6 py-4">
                     {{$pelicula->duracion}}
                 </td>
-                <td class="px-6 py-4">
-                    <div class="flex">
+                <td class="px-6 py-4 ">
+                    <div class="flex justify-center">
                         <form method="POST" action="{{ route('destroy_pelicula', ['id' => $pelicula->id] ) }}">
                             @csrf
                             @method('DELETE')
@@ -51,6 +57,11 @@
                                 Ver
                             </button>
                         </a>
+                        <a href="{{route('show_funciones_pelicula', ['id' => $pelicula->id])}}">
+                            <button class="rounded border border-blue-500 bg-transparent m-2 px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white">
+                                Ver Funciones
+                            </button>
+                        </a>
                     </div>
                 </td>
             </tr>
@@ -61,13 +72,6 @@
          {{$peliculas->links()}}
     </div>
 </div>
-<a href="{{route('crear_pelicula')}}">
-        <div class="m-5 flex justify-center">
-            <button class="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"> 
-                Agregar Pelicula
-            </button>
-        </div>
-    </a>
 </x-app-layout>
 
 

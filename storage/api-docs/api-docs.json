@@ -1,0 +1,191 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Cine API ",
+        "version": "1.0"
+    },
+    "paths": {
+        "/rest/storeEntrada": {
+            "post": {
+                "tags": [
+                    "entradas"
+                ],
+                "summary": "Crear una nueva entrada",
+                "description": "Guarda una nueva entrada asociada a una funcion y ciertos productos. Para agregar elementos al arreglo de extras se debe copiar y pegar el contenido encerrado por llaves",
+                "operationId": "a24898b4d8c4a4552a61d2e9cbc0755f",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "funcion_id": {
+                                        "type": "integer"
+                                    },
+                                    "extras": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "cantidad": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operacion exitosa",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "422": {
+                        "description": "Error: Unprocessable Content. Algun parametro no es valido",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/extras": {
+            "get": {
+                "tags": [
+                    "extras"
+                ],
+                "summary": "Mostrar los extras",
+                "operationId": "1555eac22d353a278304109ef46a4a8c",
+                "responses": {
+                    "200": {
+                        "description": "Operacion exitosa."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/funciones": {
+            "get": {
+                "tags": [
+                    "funciones"
+                ],
+                "summary": "Mostrar las funciones",
+                "operationId": "102089d5d61aae063077228eaac5fabc",
+                "responses": {
+                    "200": {
+                        "description": "Operacion exitosa."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/funciones/pelicula/{id}": {
+            "get": {
+                "tags": [
+                    "funciones/pelicula"
+                ],
+                "summary": "Mostrar las funciones de una pelicula",
+                "description": "Obtiene el listado de funciones de una pelicula determinada",
+                "operationId": "6c2fe5cc4b9cee1cd9fd6879b9219654",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operacion exitosa"
+                    },
+                    "404": {
+                        "description": "No se encontraron funciones para la pelicula solicitada, o la misma no existe en el sistema."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/funciones/sala/{id}": {
+            "get": {
+                "tags": [
+                    "funciones/sala"
+                ],
+                "summary": "Mostrar las funciones de una sala",
+                "description": "Obtiene el listado de funciones para una sala determinada",
+                "operationId": "25ce48fd78319ac8c60cc764062f0ef2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operacion exitosa"
+                    },
+                    "404": {
+                        "description": "No se encontraron funciones para la pelicula solicitada, o la misma no existe en el sistema."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/peliculas": {
+            "get": {
+                "tags": [
+                    "peliculas"
+                ],
+                "summary": "Mostrar las peliculas",
+                "operationId": "92997b9c2670cc1daab09095373584b1",
+                "responses": {
+                    "200": {
+                        "description": "Operacion exitosa."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/salas": {
+            "get": {
+                "tags": [
+                    "salas"
+                ],
+                "summary": "Mostrar las salas",
+                "operationId": "a881762f3e06f35d27ccb440ce409ad8",
+                "responses": {
+                    "200": {
+                        "description": "Operacion exitosa."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    }
+}

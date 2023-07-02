@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -35,6 +33,7 @@ Route::middleware('auth')->group(function () {
 
 //rutas de peliculas
 Route::middleware('auth')->group(function () {
+    Route::get('/', [PeliculasController::class, 'index'])->name('peliculas');
     Route::get('/peliculas', [PeliculasController::class, 'index'])->name('peliculas');
     Route::get('/crear_pelicula', [PeliculasController::class, 'create'])->name('crear_pelicula');
     Route::get('/editar_pelicula/{id}', [PeliculasController::class, 'edit'])->name('editar_pelicula');
@@ -65,6 +64,8 @@ Route::middleware('auth')->group(function () {
     Route::post('store_funcion' , [FuncionesController::class, 'store'])->name('store_funcion');
     Route::post('update_funcion/{id}' , [FuncionesController::class, 'update'])->name('update_funcion');
     Route::delete('destroy_funcion/{id}' , [FuncionesController::class, 'destroy'])->name('destroy_funcion');
+    Route::get('/pelicula/{id}/funciones/', [FuncionesController::class, 'showFuncionesPorPelicula'])->name('show_funciones_pelicula');
+    Route::get('/sala/{id}/funciones/', [FuncionesController::class, 'showFuncionesPorSala'])->name('show_funciones_sala');
 });
 
 

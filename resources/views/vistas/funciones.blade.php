@@ -7,7 +7,13 @@
 <div class="bg flex justify-center">
       <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Funciones</h1>
 </div>
-
+<a href="{{route('crear_funcion')}}">
+    <div class="m-5 flex justify-center">
+        <button class="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"> 
+            Agregar Funcion
+        </button>
+    </div>
+</a>
 <div class="m-2 w-2/3 flex">
     <form method="POST" action="{{route('indexMovie')}}">
         @csrf
@@ -18,11 +24,11 @@
             <option value="{{$pelicula->id}}">{{$pelicula->nombre}}</option>
         @endforeach
         </select>
-        <input type="submit" class="rounded border bordeblue-500 m-2 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white" value="Filtrar">
+        <input type="submit" class="rounded border border-blue-500 m-2 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white" value="Filtrar">
     </form>
 </div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -45,9 +51,9 @@
         <tbody>
             @foreach($funciones as $funcion)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{$funcion->fecha}}
-                </th>
+                </td>
                 <td class="px-6 py-4">
                 @if($funcion->pelicula!=null)
                         {{$funcion->pelicula->nombre}}
@@ -66,7 +72,7 @@
                     @endif
                 </td>
                 <td class="px-6 py-4">
-                    <div class="flex">
+                    <div class="flex justify-center">
                         <form method="POST" action="{{ route('destroy_funcion', ['id' => $funcion->id] ) }}">
                             @csrf
                             @method('DELETE')
@@ -87,11 +93,5 @@
          {{$funciones->links()}}
     </div>
 </div>
-    <a href="{{route('crear_funcion')}}">
-        <div class="m-5 flex justify-center">
-            <button class="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-500 hover:border-transparent hover:bg-blue-500 hover:text-white"> 
-                Agregar Funcion
-            </button>
-        </div>
-    </a>
+
 </x-app-layout>

@@ -12,7 +12,8 @@ class Sala extends Model
     use HasFactory;
 
     protected $table = 'salas';
-    use HasFactory;
+    protected $hidden = ['created_at','updated_at','id'];
+
 
     public function funciones(): HasMany
     {

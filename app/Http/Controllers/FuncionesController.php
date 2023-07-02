@@ -10,93 +10,137 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\FuncionStoreRequest;
 use App\Http\Requests\FuncionUpdateRequest;
+use App\Http\Resources\FuncionResource;
+use Illuminate\Http\Response;
 
 class FuncionesController extends Controller
 {
-    
+
     /**
-     * Display a listing of the resource.
+     * @return \Illuminate\Http\Response
+     *
      * @OA\Get(
-     *      path="/funciones",
-     *      tags="Funciones",
-     *      summary="Retorna las funciones existentes."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
+     *     path="/rest/funciones",
+     *     tags={"funciones"},
+     *     summary="Mostrar las funciones",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operacion exitosa."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     * ) 
      */
+    public function indexApi()
+    {
+        $ahora = Carbon::now();  
+        return FuncionResource::collection(Funcion::where('fecha','>',$ahora)->orderBy('fecha', 'asc')->get());
+    }
+
+
+    /**
+     * @OA\Get(
+     *    path="/rest/funciones/pelicula/{id}",
+     *    tags={"funciones/pelicula"},
+     *    summary="Mostrar las funciones de una pelicula",
+     *    description="Obtiene el listado de funciones de una pelicula determinada",
+     *    @OA\Parameter(name="id",in="path", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *     @OA\Response(
+     *          response=200, description="Operacion exitosa",
+     *       ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="No se encontraron funciones para la pelicula solicitada, o la misma no existe en el sistema."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     *  )
+     */
+    public function indexMovieApi(int $id)
+    {
+        $pelicula = Pelicula::find($id);
+        if ($pelicula === null) {
+            return response()->json(['success' => 'false', 'message' => 'No se encontraron funciones para la pelicula solicitada, o la misma no existe en el sistema.'], 404);
+        }
+        $ahora = Carbon::now();  
+        return FuncionResource::collection($pelicula->funciones()->where('fecha', '>', $ahora)->orderBy('fecha', 'asc')->get());
+    }
+
+
+
+    /**
+     * @OA\Get(
+     *    path="/rest/funciones/sala/{id}",
+     *    tags={"funciones/sala"},
+     *    summary="Mostrar las funciones de una sala",
+     *    description="Obtiene el listado de funciones para una sala determinada",
+     *    @OA\Parameter(name="id",in="path", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *     @OA\Response(
+     *          response=200, description="Operacion exitosa",
+     *       ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="No se encontraron funciones para la pelicula solicitada, o la misma no existe en el sistema."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     *  )
+     */
+    public function showFuncionesPorSalaApi(int $id)
+    {
+        $sala = Sala::find($id);
+        if ($sala === null) {
+            return response()->json(['success' => 'false', 'message' => 'No se encontraron funciones para la sala solicitada, o la misma no existe en el sistema.'], 404);
+        }
+        $ahora = Carbon::now();  
+        
+        return FuncionResource::collection(($sala->funciones()->where('fecha', '>', $ahora)->orderBy('fecha', 'asc')->get())->makeHidden(['created_at','updated_at']));
+    }
+
     public function index()
     {
         $peliculas = Pelicula::all();
         $funciones = Funcion::orderBy('fecha', 'desc')->paginate(6);
-        return view('vistas.funciones')->with(compact('funciones','peliculas'));
+        return view('vistas.funciones')->with(compact('funciones', 'peliculas'));
     }
 
-
-    /**
-     * @OA\Post(
-     *      path="/funciones",
-     *      tags="Funciones",
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
     public function indexMovie(Request $request)
     {
-        if($request->elegida == -1)
-        {
-          return $this->index();   
-        }
-        else{
+        if ($request->elegida == -1) {
+            return $this->index();
+        } else {
             $id = $request->elegida;
             $peliculas = Pelicula::all();
             $pelicula = Pelicula::findOrFail($id);
-            $funciones = Funcion::where('pelicula_id',$id)->orderBy('fecha', 'desc')->paginate(6);
-            return view('vistas.funciones')->with(compact('funciones','pelicula','peliculas'));
+            $funciones = Funcion::where('pelicula_id', $id)->orderBy('fecha', 'desc')->paginate(6);
+            return view('vistas.funciones')->with(compact('funciones', 'pelicula', 'peliculas'));
         }
-        
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     * @OA\Get(
-     *      path="/crear_funcion",
-     *      tags="Funciones",
-     *      summary="Crea una función con sus respectivos detalles."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
     public function create()
     {
         $peliculas = Pelicula::all();
         $salas =  Sala::all();
-        return view('vistas.crear_funcion')->with(compact('peliculas','salas'));
+        return view('vistas.crear_funcion')->with(compact('peliculas', 'salas'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @OA\Post(
-     *      path="store_funcion",
-     *      tags="Funciones",
-     *      summary="Guarda una funcion creada con sus respectivos detalles."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
+
     public function store(FuncionStoreRequest $request)
     {
         $funcion = new Funcion();
         $pelicula = Pelicula::findOrFail($request->pelicula);
-        $fecha = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha); 
+        $fecha = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha);
         $fin = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha)->addMinutes($pelicula->duracion);
         $funcion->precio = $request->precio;
         $funcion->fecha = $fecha;
@@ -107,56 +151,21 @@ class FuncionesController extends Controller
         return redirect()->route('funciones')->with('message', 'Funcion creada correctamente!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param  int  $id
-     * @return \Illuminate\Http\Response 
-     * @OA\Get(
-     *      path="/editar_funcion/{id}",
-     *      tags="Funciones",
-     *      summary="Obtiene una funcion por id y permite editarla."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
     public function edit(string $id)
     {
-       $funcion = Funcion::findOrFail($id);
-       $peliculas = Pelicula::all();
-       $salas = Sala::all();
-       
-       return view('vistas.editar_funcion')->with(compact('funcion','peliculas','salas'));
+        $funcion = Funcion::findOrFail($id);
+        $peliculas = Pelicula::all();
+        $salas = Sala::all();
+
+        return view('vistas.editar_funcion')->with(compact('funcion', 'peliculas', 'salas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param  int  $id
-     * @return \Illuminate\Http\Response 
-     * @OA\Post(
-     *      path="update_funcion/{id}",
-     *      tags="Funciones",
-     *      summary="Obtiene una funcion por id y permite actualizarla."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
+
     public function update(FuncionUpdateRequest $request, string $id)
     {
         $funcion = Funcion::findOrFail($id);
         $pelicula = Pelicula::findOrFail($request->pelicula);
-        $fecha = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha); 
+        $fecha = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha);
         $fin = Carbon::createFromFormat('Y-m-d\TH:i', $request->fecha)->addMinutes($pelicula->duracion);
         $funcion->precio = $request->precio;
         $funcion->fecha = $fecha;
@@ -165,29 +174,27 @@ class FuncionesController extends Controller
         $funcion->pelicula_id = $request->pelicula;
         $funcion->save();
         return redirect()->route('funciones')->with('message', 'Funcion editada correctamente!');
-   
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param  int  $id
-     * @return \Illuminate\Http\Response 
-     * @OA\Delete(
-     *      path="destroy_funcion/{id}",
-     *      tags="Funciones",
-     *      summary="Busca una funcion por id y permite eliminarla."
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK"
-     *      )
-     * )
-     */
+
     public function destroy(string $id)
     {
         $funcion = Funcion::findOrFail($id);
         $funcion->delete();
-        return redirect()->back()->with('message', 'Funcion eliminada correctamente!');   
-
+        return redirect()->back()->with('message', 'Funcion eliminada correctamente!');
     }
 
+    public function showFuncionesPorPelicula(string $id)
+    {
+        $funciones = Funcion::where('pelicula_id', $id)->paginate(6);
+        $nombre = $funciones->first()->pelicula->nombre;
+        return view('vistas.mostrar_funciones_pelicula')->with(compact('funciones', 'nombre'));
+    }
+
+    public function showFuncionesPorSala(string $id)
+    {
+        $funciones = Funcion::where('sala_id', $id)->paginate(6);
+        $nombre = $funciones->first()->sala->nombre;
+        return view('vistas.mostrar_funciones_sala')->with(compact('funciones', 'nombre'));
+    }
 }
