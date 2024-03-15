@@ -2,7 +2,7 @@
     "version": 2,
     "functions": {
         "api/index.php": { 
-            "runtime": "vercel-php@0.6.0" 
+            "runtime": "vercel-php@0.7.0" 
         }
     },
 
@@ -24,7 +24,14 @@
         "APP_DEBUG": "true",
         "NEXT_PUBLIC_SUPABASE_URL": "https://vxhbrvoxntfzyholqegd.supabase.co",
 
-        
+        "DB_CONNECTION":"pgsql",
+        "DB_HOST":"aws-0-us-east-1.pooler.supabase.com",
+        "DB_PORT":"5432",
+        "DB_DATABASE":"postgres",
+        "DB_USERNAME":"postgres.vxhbrvoxntfzyholqegd",
+        "DB_PASSWORD":"CVGhtbDeaESXvBK5",
+
+
         "MAIL_DRIVER":"smtp",
         "MAIL_HOST":"smtp.gmail.com",
         "MAIL_PORT":"465",
