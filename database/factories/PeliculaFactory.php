@@ -15,7 +15,7 @@ class PeliculaFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
         /**$faker = \Faker\Factory::create();
         $faker->addProvider(new \Xylis\FakerCinema\Provider\Movie($faker));
