@@ -1,5 +1,8 @@
 <?php
 
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -37,7 +40,7 @@ class RolesYPermisosSeeder extends Seeder
         $adminCandyBar = Role::create(['name' => 'adminCandyBar']);
         $adminCandyBar->givePermissionTo(['crear extra' , 'editar extra', 'borrar extra']);      
 
-        $admin = Role::create(['name' => 'super-admin']);
+        $admin = Role::create(['name' => 'superAdmin']);
         $admin->givePermissionTo(Permission::all());
     }
 }
