@@ -24,7 +24,7 @@ class PeliculaStoreRequest extends FormRequest
     {
         return [
             "nombre"  => "unique:peliculas,nombre",
-            "poster"  => "unique:peliculas,poster",
+            "poster"  => "required|image|mimes:jpeg,png,jpg,gif|max:2048",
             "duracion" => "gt:0"
         ];
     }

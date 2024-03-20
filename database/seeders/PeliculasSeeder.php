@@ -27,10 +27,13 @@ class PeliculasSeeder extends Seeder
         $results = $data['results'];
 
         $datosFiltrados = collect($results)->map(function ($item) {
+            
+            $poster = file_get_contents("https://image.tmdb.org/t/p/w200/".$item['poster_path']);
+            $posterBase64 = base64_encode($poster);
             return [
                 'nombre' => $item['title'],
                 'duracion' => random_int(60, 180),
-                'poster' => "https://image.tmdb.org/t/p/original/".$item['poster_path']
+                'poster' => $posterBase64
             ];
         })->toArray();
 
