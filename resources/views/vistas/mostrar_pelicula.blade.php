@@ -9,8 +9,7 @@
     </div>
 
     <div class="flex w-full justify-center items-center">
-        <img class="object-center" name='poster' src="{{$pelicula->poster}}"> 
-        
+        <img src="data:image/jpeg;base64,{{ $pelicula->poster }}" alt="Imagen de la película {{$pelicula->nombre}}">
     </div>
     
 </x-app-layout>

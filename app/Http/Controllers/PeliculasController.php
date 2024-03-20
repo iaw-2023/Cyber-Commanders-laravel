@@ -7,28 +7,28 @@ use App\Http\Resources\PeliculaResource;
 use App\Models\Pelicula;
 use App\Http\Requests\PeliculaStoreRequest;
 use App\Http\Requests\PeliculaUpdateRequest;
-
+use Illuminate\Support\Facades\DB;
 
 class PeliculasController extends Controller
 {
-    
-/**
- * @return \Illuminate\Http\Response
- *
- * @OA\Get(
- *     path="/rest/peliculas",
- *     tags={"peliculas"},
- *     summary="Mostrar las peliculas",
- *     @OA\Response(
- *         response=200,
- *         description="Operacion exitosa."
- *     ),
- *     @OA\Response(
- *         response="default",
- *         description="Ha ocurrido un error."
- *     )
- * ) 
- */
+
+    /**
+     * @return \Illuminate\Http\Response
+     *
+     * @OA\Get(
+     *     path="/rest/peliculas",
+     *     tags={"peliculas"},
+     *     summary="Mostrar las peliculas",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operacion exitosa."
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="Ha ocurrido un error."
+     *     )
+     * ) 
+     */
     public function indexApi()
     {
         return PeliculaResource::collection(Pelicula::all());
@@ -42,10 +42,10 @@ class PeliculasController extends Controller
         return view('vistas.peliculas')->with(compact('peliculas'));
     }
 
- 
+
     public function create()
     {
-        
+
         return view('vistas.crear_pelicula');
     }
 
@@ -55,44 +55,44 @@ class PeliculasController extends Controller
         $pelicula = new Pelicula();
         $pelicula->nombre = $request->nombre;
         $pelicula->duracion = $request->duracion;
-        $pelicula->poster = $request->poster;
-
+        $pelicula->poster = base64_encode(file_get_contents($request->file('poster')->getRealPath()));
         $pelicula->save();
+        
         return redirect()->route('peliculas')->with('message', 'Pelicula creada correctamente!');
     }
 
-  
     public function show(string $id)
     {
         $pelicula = Pelicula::findOrFail($id);
         return view('vistas.mostrar_pelicula')->with(compact('pelicula'));
     }
 
- 
+
     public function edit(string $id)
     {
         $pelicula = Pelicula::findOrFail($id);
         return view('vistas.editar_pelicula')->with(compact('pelicula'));
     }
 
-  
+
     public function update(PeliculaUpdateRequest $request, string $id)
     {
+        
         $pelicula = Pelicula::findOrFail($id);
         $pelicula->nombre = $request->nombre;
         $pelicula->duracion = $request->duracion;
-        $pelicula->poster = $request->poster;
+        if($request->poster!=null)
+            $pelicula->poster = base64_encode(file_get_contents($request->file('poster')->getRealPath()));
         $pelicula->save();
         return redirect()->route('peliculas')->with('exito', 'Pelicula editada correctamente!');
         //
     }
 
-  
+
     public function destroy(string $id)
     {
         $pelicula = Pelicula::findOrFail($id);
         $pelicula->delete();
-        return redirect()->route('peliculas')->with('exito', 'Pelicula eliminada correctamente!');   
+        return redirect()->route('peliculas')->with('exito', 'Pelicula eliminada correctamente!');
     }
-
 }

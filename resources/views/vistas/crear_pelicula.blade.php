@@ -8,7 +8,7 @@
         </ul>
     </div>
 @endif
-  <form method="POST" action="{{route('store_pelicula')}}" >
+  <form method="POST" action="{{route('store_pelicula')}}" enctype="multipart/form-data" >
     @csrf
     <div class="bg flex justify-center">
       <h1 class="m-4 text-4xl font-extrabold leading-none tracking-tight">Nueva Pelicula</h1>
@@ -24,7 +24,7 @@
       </div>
       <div class="m-3 w-1/3">
         <label for="poster" class="mb-2 block font-medium text-gray-900">Poster</label>
-        <input type="text" name="poster" id="poster" class="block w-full border border-gray-400 p-2.5" placeholder="Inserte Link del Poster" required />
+        <input type="file" name="poster" id="poster" class="block w-full border border-gray-400 p-2.5" placeholder="Cargar Poster" required />
       </div>
     </div>
     <button type="submit" class="ml-5 rounded-lg bg-blue-700 px-5 py-2.5 text-center font-medium text-white">Guardar</button>
