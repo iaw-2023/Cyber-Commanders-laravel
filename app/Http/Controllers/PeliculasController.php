@@ -7,33 +7,95 @@ use App\Http\Resources\PeliculaResource;
 use App\Models\Pelicula;
 use App\Http\Requests\PeliculaStoreRequest;
 use App\Http\Requests\PeliculaUpdateRequest;
-use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class PeliculasController extends Controller
 {
+    
+/**
+ * @return \Illuminate\Http\Response
+ *
+ * @OA\Get(
+ *     path="/rest/peliculas",
+ *     tags={"peliculas"},
+ *     summary="Mostrar todas las peliculas",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Operación exitosa."
+ *     ),
+ *     @OA\Response(
+ *         response="default",
+ *         description="Ha ocurrido un error."
+ *     )
+ * ) 
+ */
+public function indexApi()
+{
+    return PeliculaResource::collection(Pelicula::all());
+}
 
-    /**
-     * @return \Illuminate\Http\Response
-     *
-     * @OA\Get(
-     *     path="/rest/peliculas",
-     *     tags={"peliculas"},
-     *     summary="Mostrar las peliculas",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Operacion exitosa."
-     *     ),
-     *     @OA\Response(
-     *         response="default",
-     *         description="Ha ocurrido un error."
-     *     )
-     * ) 
-     */
-    public function indexApi()
-    {
-        return PeliculaResource::collection(Pelicula::all());
+/**
+ * @return \Illuminate\Http\Response
+ *
+ * @OA\Get(
+ *     path="/rest/peliculasPorNombre",
+ *     tags={"peliculas"},
+ *     summary="Coleccion de los nombres de las peliculas",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Operación exitosa."
+ *     ),
+ *     @OA\Response(
+ *         response="default",
+ *         description="Ha ocurrido un error."
+ *     )
+ * ) 
+ */
+public function getMovieNames()
+{
+    return Pelicula::get('nombre')->toArray();
+}
+
+
+/**
+ * @param string $nombre
+ * @return \Illuminate\Http\Response
+ *
+ * @OA\Get(
+ *     path="/rest/peliculas/{nombre}",
+ *     tags={"peliculas"},
+ *     summary="Buscar una pelicula por nombre",
+ *     @OA\Parameter(
+ *         name="nombre",
+ *         in="path",
+ *         description="Nombre de la película a buscar",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="string"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Operación exitosa."
+ *     ),
+ *     @OA\Response(
+ *         response="default",
+ *         description="Ha ocurrido un error."
+ *     )
+ * )
+ */
+public function buscarPorNombre($nombre)
+{
+    $pelicula = Pelicula::where('nombre', $nombre)->first();
+
+    if (!$pelicula) {
+        return response()->json(['error' => 'La película no fue encontrada'], Response::HTTP_NOT_FOUND);
     }
 
+    // Si se encuentra la película, puedes devolverla como lo harías normalmente
+    return new PeliculaResource($pelicula);
+}
 
     public function index()
     {

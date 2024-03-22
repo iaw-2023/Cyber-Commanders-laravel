@@ -158,11 +158,56 @@
                 "tags": [
                     "peliculas"
                 ],
-                "summary": "Mostrar las peliculas",
+                "summary": "Mostrar todas las peliculas",
                 "operationId": "92997b9c2670cc1daab09095373584b1",
                 "responses": {
                     "200": {
-                        "description": "Operacion exitosa."
+                        "description": "Operación exitosa."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/peliculasPorNombre": {
+            "get": {
+                "tags": [
+                    "peliculas"
+                ],
+                "summary": "Coleccion de los nombres de las peliculas",
+                "operationId": "929dc90547b4184e5cd18584ba1bf688",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/rest/peliculas/{nombre}": {
+            "get": {
+                "tags": [
+                    "peliculas"
+                ],
+                "summary": "Buscar una pelicula por nombre",
+                "operationId": "68fb7bf5832f59e8b4b172d8b4df906d",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "path",
+                        "description": "Nombre de la película a buscar",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa."
                     },
                     "default": {
                         "description": "Ha ocurrido un error."

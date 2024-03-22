@@ -29,4 +29,6 @@ Route::get('funciones/pelicula/{id}', [FuncionesController::class, 'indexMovieAp
 Route::get('funciones/sala/{id}', [FuncionesController::class, 'showFuncionesPorSalaApi']);
 Route::get('salas', [SalasController::class, 'indexApi']);
 Route::get('peliculas', [PeliculasController::class, 'indexApi']);
+Route::get('peliculasPorNombre', [PeliculasController::class, 'getMovieNames']);
+Route::get('peliculas/{nombre}', [PeliculasController::class, 'buscarPorNombre']);
 Route::post('storeEntrada', [EntradasController::class, 'storeEntrada']);
