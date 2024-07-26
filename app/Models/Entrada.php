@@ -23,4 +23,7 @@ class Entrada extends Model
         return $this->belongsToMany(Extra::class, 'extras_entradas', 'entradas_id', 'extras_id')
         ->withPivot('cantidad');
     }
+    
 }
+
+

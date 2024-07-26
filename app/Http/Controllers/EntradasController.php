@@ -26,7 +26,10 @@ class EntradasController extends Controller
 
     public function indexApi()
     {
-        return Entrada::all();
+        $entradas = Entrada::all();
+
+        return response()->json($entradas, 200);
+
     }
 
     /**
@@ -142,7 +145,7 @@ class EntradasController extends Controller
     
                 $entradas = Entrada::where('user_id', $sub)
                     ->with([
-                        'extras:id,producto,tamaño,precio,pivot.cantidad', // Incluye la cantidad en la relación
+                        'extras:id,producto,tamaño,precio,extras_entradas.cantidad', // Incluye la cantidad en la relación
                         'funcion:id,fecha,precio,sala_id,pelicula_id',
                         'funcion.sala:id,nombre',
                         'funcion.pelicula:id,nombre'
