@@ -32,7 +32,7 @@ class EntradasController extends Controller
     /**
      * @OA\Post(
      *     path="/rest/storeEntrada",
-     *     description="Guarda una nueva entrada asociada a una funcion y ciertos productos. Para agregar elementos al arreglo de extras se debe copiar y pegar el contenido encerrado por llaves",
+     *     description="Con esta ruta se guarda una nueva entrada asociada a una funcion y ciertos productos. Para agregar elementos al arreglo de extras se debe copiar y pegar el contenido encerrado por llaves",
      *     summary="Crear una nueva entrada",
      *     tags={"entradas"},
      *     @OA\RequestBody(
@@ -128,7 +128,7 @@ class EntradasController extends Controller
             'domain' => env('AUTH0_DOMAIN'),
             'clientId' => env('AUTH0_CLIENT_ID'),
             'clientSecret' => env('AUTH0_CLIENT_SECRET'),
-            'audience' => ['http://localhost:8000/rest/']
+            'audience' => ['https://cyber-commanders-laravel.vercel.app/rest/']
         ]);
     
         $token = $request->bearerToken();
@@ -136,24 +136,21 @@ class EntradasController extends Controller
             return response()->json(["message" => "No Autorizado"], 401);
         } else {
             try {
-                
                 $decodedToken = $auth0->decode($token);
                 $infoToken = $decodedToken->toArray();
                 $sub = $infoToken['sub']; 
-                
-
+    
                 $entradas = Entrada::where('user_id', $sub)
-                ->with([
-                    'extras:id,producto,tamaño,precio', // Seleccionar columnas específicas de extras
-                    'funcion:id,fecha,precio,sala_id,pelicula_id', // Seleccionar columnas específicas de funcion
-                    'funcion.sala:id,nombre', // Seleccionar columnas específicas de sala
-                    'funcion.pelicula:id,nombre' // Seleccionar columnas específicas de pelicula
-                ])
-                ->get([
-                    'id', 'funcion_id', 'user_id' // Seleccionar columnas específicas de entrada
-                ]);
-
-
+                    ->with([
+                        'extras:id,producto,tamaño,precio,pivot.cantidad', // Incluye la cantidad en la relación
+                        'funcion:id,fecha,precio,sala_id,pelicula_id',
+                        'funcion.sala:id,nombre',
+                        'funcion.pelicula:id,nombre'
+                    ])
+                    ->get([
+                        'id', 'funcion_id', 'user_id'
+                    ]);
+    
                 return response()->json($entradas, 200);
     
             } catch (InvalidTokenException $exception) {
@@ -161,4 +158,5 @@ class EntradasController extends Controller
             }
         }
     }
+    
 }
