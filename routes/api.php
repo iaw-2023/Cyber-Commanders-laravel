@@ -23,6 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('entradas/request', [EntradasController::class, 'indexApiRequest']);
+Route::get('entradas', [EntradasController::class, 'indexApi']);
 Route::get('extras', [ExtrasController::class, 'indexApi']);
 Route::get('funciones', [FuncionesController::class, 'indexApi']);
 Route::get('funciones/pelicula/{id}', [FuncionesController::class, 'indexMovieApi']);
