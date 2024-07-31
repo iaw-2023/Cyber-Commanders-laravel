@@ -6,6 +6,7 @@ use App\Http\Controllers\PeliculasController;
 use App\Http\Controllers\ExtrasController;
 use App\Http\Controllers\FuncionesController;
 use App\Http\Controllers\EntradasController;
+
 use App\Http\Controllers\SalasController;
 
 /* 
@@ -34,3 +35,4 @@ Route::get('peliculas', [PeliculasController::class, 'indexApi']);
 Route::get('peliculasPorNombre', [PeliculasController::class, 'getMovieNames']);
 Route::get('peliculas/{nombre}', [PeliculasController::class, 'buscarPorNombre']);
 Route::post('storeEntrada', [EntradasController::class, 'storeEntrada']);
+Route::post('procesarCompra', [EntradasController::class, 'procesarCompra']);

@@ -13,6 +13,12 @@ use Exception;
 use Illuminate\Http\Request;
 
 
+use MercadoPago\Client\Common\RequestOptions;
+use MercadoPago\Client\Payment\PaymentClient;
+use MercadoPago\Exceptions\MPApiException;
+use MercadoPago\MercadoPagoConfig;
+
+
 class EntradasController extends Controller
 {
     /**
@@ -29,7 +35,6 @@ class EntradasController extends Controller
         $entradas = Entrada::all();
 
         return response()->json($entradas, 200);
-
     }
 
     /**
@@ -74,7 +79,7 @@ class EntradasController extends Controller
      */
     public function storeEntrada(EntradaStoreRequest $request)
     {
-       $auth0 = new Auth0([
+        $auth0 = new Auth0([
             'strategy' => SdkConfiguration::STRATEGY_API,
             'domain' => env('AUTH0_DOMAIN'),
             'clientId' => env('AUTH0_CLIENT_ID'),
@@ -87,39 +92,35 @@ class EntradasController extends Controller
             return response()->json(["message" => "No Autorizado"], 401);
         } else {
             try {
-                
+
                 $decodedToken = $auth0->decode($token);
                 $infoToken = $decodedToken->toArray();
-                $user_id = $infoToken['sub']; 
-                
-                
+                $user_id = $infoToken['sub'];
+
+
 
                 $entrada = new Entrada();
                 $funcion = Funcion::findOrFail($request->funcion_id);
-                
-                
+
+
                 $entrada->user_id = $user_id;
-                
+
                 $entrada->funcion_id = $funcion->id;
                 $extras = $request->extras;
-                
+
                 $entrada->save();
-                
-                
+
+
                 foreach ($extras as $extra) {
                     $entrada->extras()->attach($extra['id'], ['cantidad' => $extra['cantidad']]);
                 }
                 return response()->json(['success' => 'true', 'message' => 'Operacion Exitosa. Entrada guardada'], 200);
-
-    
             } catch (InvalidTokenException $exception) {
                 return response()->json(["error" => $exception->getMessage()], 401);
-            }
-
-            catch (Exception $exception) {
+            } catch (Exception $exception) {
                 return response()->json(["error" => $exception->getMessage()], 401);
             }
-        } 
+        }
         return response()->json(['success' => 'true', 'message' => 'Operacion Exitosa.'], 200);
     }
 
@@ -133,7 +134,7 @@ class EntradasController extends Controller
             'clientSecret' => env('AUTH0_CLIENT_SECRET'),
             'audience' => ['https://cyber-commanders-laravel.vercel.app/rest/']
         ]);
-    
+
         $token = $request->bearerToken();
         if ($token === null) {
             return response()->json(["message" => "No Autorizado"], 401);
@@ -141,8 +142,8 @@ class EntradasController extends Controller
             try {
                 $decodedToken = $auth0->decode($token);
                 $infoToken = $decodedToken->toArray();
-                $sub = $infoToken['sub']; 
-    
+                $sub = $infoToken['sub'];
+
                 $entradas = Entrada::where('user_id', $sub)
                     ->with([
                         'extras:id,producto,tamaño,precio,extras_entradas.cantidad', // Incluye la cantidad en la relación
@@ -153,13 +154,76 @@ class EntradasController extends Controller
                     ->get([
                         'id', 'funcion_id', 'user_id'
                     ]);
-    
+
                 return response()->json($entradas, 200);
-    
             } catch (InvalidTokenException $exception) {
                 return response()->json(["error" => $exception->getMessage()], 401);
             }
         }
     }
-    
+
+
+
+
+    public function procesarCompra(Request $request)
+    {
+        $auth0 = new Auth0([
+            'strategy' => SdkConfiguration::STRATEGY_API,
+            'domain' => env('AUTH0_DOMAIN'),
+            'clientId' => env('AUTH0_CLIENT_ID'),
+            'clientSecret' => env('AUTH0_CLIENT_SECRET'),
+            'audience' => ['https://https://cyber-commanders-laravel.vercel.app/rest/']
+        ]);
+
+        $token = $request->bearerToken();
+        if ($token === null) {
+            return response()->json(["message" => "No Autorizado"], 401);
+        }
+
+        try {
+            $decodedToken = $auth0->decode($token);
+            $infoToken = $decodedToken->toArray();
+            $user_id = $infoToken['sub'];
+
+            // Procesar datos de la entrada
+            $entradaData = $request->input('entradaData');
+            $extras = $entradaData['extras'];
+            $funcion_id = $entradaData['funcion_id'];
+
+            $entrada = new Entrada();
+            $entrada->user_id = $user_id;
+            $entrada->funcion_id = $funcion_id;
+            $entrada->save();
+
+            foreach ($extras as $extra) {
+                $entrada->extras()->attach($extra['id'], ['cantidad' => $extra['cantidad']]);
+            }
+
+            // Procesar pago con MercadoPago
+            MercadoPagoConfig::setAccessToken("TEST-7426401162927896-072911-835d4edc71f4306f5974898fd7bfde75-603075297");
+            MercadoPagoConfig::setRuntimeEnviroment(MercadoPagoConfig::LOCAL);
+
+            $client = new PaymentClient();
+            $paymentData = $request->input('mpData');
+
+            $request_options = new RequestOptions();
+            $payment = $client->create($paymentData, $request_options);
+
+            $response = [
+                'status' => $payment->status,
+                'status_detail' => $payment->status_detail,
+                'id' => $payment->id,
+                'email' => $paymentData['payer']['email']
+            ];
+
+
+            return response()->json(['success' => 'true', 'message' => 'Operación Exitosa', 'paymentResponse' => $response], 200);
+        } catch (InvalidTokenException $exception) {
+            return response()->json(["error" => $exception->getMessage()], 401);
+        } catch (MPApiException $e) {
+            return response()->json(["error" => $e->getMessage()], 401);
+        } catch (\Exception $e) {
+            return response()->json(["error" => $e->getMessage()], 500);
+        }
+    }
 }
