@@ -172,7 +172,7 @@ class EntradasController extends Controller
             'domain' => env('AUTH0_DOMAIN'),
             'clientId' => env('AUTH0_CLIENT_ID'),
             'clientSecret' => env('AUTH0_CLIENT_SECRET'),
-            'audience' => ['https://https://cyber-commanders-laravel.vercel.app/rest/']
+            'audience' => ['https://cyber-commanders-laravel.vercel.app/rest/']
         ]);
 
         $token = $request->bearerToken();
